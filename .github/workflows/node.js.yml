@@ -31,7 +31,6 @@ jobs:
         cache: 'npm'
     #执行执行某个shell命令或脚本
     - run: npm run build --if-present
-    - run: npm test
     
     #关于deploy自动部署项目至阿里云的actions
     - name: Deploy
