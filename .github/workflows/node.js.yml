@@ -30,7 +30,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     #执行执行某个shell命令或脚本
-    - run: npm ci
     - run: npm run build --if-present
     - run: npm test
     
