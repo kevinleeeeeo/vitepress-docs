@@ -40,7 +40,7 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.ALIYUN }}
         ARGS: "-rltgoDzv0 --delete"
         #复制源是 ghpages分支下所有文件
-        SOURCE: "/"
+        SOURCE: "docs/.vitepress/dist"
         REMOTE_HOST: "120.77.63.71"
         REMOTE_USER: "root"
         #复制至服务器目录
