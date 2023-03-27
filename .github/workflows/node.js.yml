@@ -22,13 +22,13 @@ jobs:
     #步骤合集
     steps:
     #使用checkout@v3这个action获取源码
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     #新建一个名为checkout_actions的步骤
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+    - run: npm install
     #执行执行某个shell命令或脚本
     - run: npm run build --if-present
     
