@@ -5,7 +5,7 @@ export default defineConfig({
   title: '大田',
   description: 'Vite & Vue powered static site generator.',
   author: 'kevinlee',
-  base: '/vitepress-docs/', // https://gitee.com/kevinleeeee/vitepress-docs-site
+  base: '/', // https://gitee.com/kevinleeeee/vitepress-docs-site
   appearance: true,
   lastUpdated: true, //以git提交的时间为更新时间
   themeConfig: {
