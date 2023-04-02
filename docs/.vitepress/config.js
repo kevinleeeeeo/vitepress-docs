@@ -1,5 +1,8 @@
 import { defineConfig } from 'vitepress';
-import autoSideBar from './AutoSideBar';
+// import autoSideBar from './AutoSideBar';
+import generateIndexMdFile from './AutoGenrateIndexPage';
+
+generateIndexMdFile(['/plans/', '/notes/']);
 
 export default defineConfig({
   title: '大田',
@@ -12,8 +15,8 @@ export default defineConfig({
     siteTitle: '大田', //导航栏配置
     logo: '/img/dog.svg', //导航栏左侧头像,
     nav: [
-      { text: 'Plan', link: '/plans/' },
-      { text: 'Note', link: '/notes/' }
+      { text: 'Plans', link: '/plans/' },
+      { text: 'Notes', link: '/notes/' }
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kevinlee-coder' },
@@ -25,7 +28,29 @@ export default defineConfig({
         link: 'https://gitee.com/kevinleeeee'
       }
     ],
-    sidebar: autoSideBar('/plans/')
+    // sidebar: autoSideBar(['/plans/', '/notes/'])
+    sidebar: {
+      '/notes/': [
+        {
+          text: 'ES6',
+          collapsible: true,
+          items: [
+            {
+              text: '1.新增特性',
+              link: '/notes/ES6/1.新增特性'
+            },
+            {
+              text: '2.Map&Set数据类型',
+              link: '/notes/ES6/2.Map&Set数据类型'
+            },
+            {
+              text: '3.面向对象',
+              link: '/notes/ES6/3.面向对象'
+            }
+          ]
+        }
+      ]
+    }
     // sidebar: {
     //   '/notes/': [
     //     {

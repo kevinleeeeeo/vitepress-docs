@@ -16,25 +16,32 @@ export default class AutoSideBar {
   }
 
   createSideBarItems() {
-    let files = readDir(this.path);
-    // files = files.reverse();
-    files = excludeFile(files, 'index.md');
-    files = removeFilesExt(files);
-    files = dateReverse(files);
-    this.files = files;
+    if (this.path === '/plans/') {
+      let files = readDir(this.path);
+      files = excludeFile(files, 'index.md');
+      files = removeFilesExt(files);
+      files = dateReverse(files);
+      this.files = files;
 
-    files.forEach((file) => {
-      this.sideBarItems.push({
-        text: file,
-        link: `${this.path}${file}`
+      files.forEach((file) => {
+        this.sideBarItems.push({
+          text: file,
+          link: `${this.path}${file}`
+        });
       });
-    });
 
-    return this.sideBarItems;
-  }
+      return this.sideBarItems;
+    }
+    if (this.path === '/notes/') {
+      let files = readDir(this.path);
+      files.forEach((file) => {
+        this.sideBarItems.push({
+          text: file,
+          link: `${this.path}${file}`
+        });
+      });
 
-  generateIndexMdFile() {
-    this.indexContent = indexTemplate(this.files, this.path);
-    writeFile(this.path, this.indexContent);
+      return this.sideBarItems;
+    }
   }
 }
