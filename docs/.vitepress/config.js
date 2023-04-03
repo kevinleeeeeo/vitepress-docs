@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress';
-// import autoSideBar from './AutoSideBar';
-import generateIndexMdFile from './AutoGenrateIndexPage';
+import autoSideBar from './AutoSideBar';
+import generateIndexMdFile from './AutoGenIndexPage';
 
 generateIndexMdFile(['/plans/', '/notes/']);
 
@@ -28,71 +28,46 @@ export default defineConfig({
         link: 'https://gitee.com/kevinleeeee'
       }
     ],
-    // sidebar: autoSideBar(['/plans/', '/notes/'])
-    sidebar: {
-      '/notes/': [
-        {
-          text: 'ES6',
-          collapsible: true,
-          items: [
-            {
-              text: '1.新增特性',
-              link: '/notes/ES6/1.新增特性'
-            },
-            {
-              text: '2.Map&Set数据类型',
-              link: '/notes/ES6/2.Map&Set数据类型'
-            },
-            {
-              text: '3.面向对象',
-              link: '/notes/ES6/3.面向对象'
-            }
-          ]
-        }
-      ]
-    }
+    sidebar: autoSideBar(['/plans/', '/notes/'])
+    // sidebar: {
+    //   '/plans/': [
+    //     {
+    //       text: 'ES6',
+    //       link: 'xxxxx'
+    //     },
+    //     {
+    //       text: 'ES6',
+    //       link: 'xxxxx'
+    //     },
+    //     {
+    //       text: 'ES6',
+    //       link: 'xxxxx'
+    //     }
+    //   ]
+    // }
     // sidebar: {
     //   '/notes/': [
     //     {
-    //       text: 'CSS',
+    //       text: 'ES6',
     //       collapsible: true,
     //       items: [
     //         {
-    //           text: 'CSS基础',
-    //           link: '/notes/css/1.CSS基础'
+    //           text: '1.新增特性',
+    //           link: '/notes/ES6/1.新增特性'
     //         },
     //         {
-    //           text: 'Flex布局',
-    //           link: '/notes/css/2.Flex布局'
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       text: 'ES3&ES5',
-    //       collapsible: true,
-    //       items: [
-    //         {
-    //           text: '编程语言&浏览器历史',
-    //           link: '/notes/es3&es5/1.编程语言&浏览器历史'
+    //           text: '2.Map&Set数据类型',
+    //           link: '/notes/ES6/2.Map&Set数据类型'
     //         },
     //         {
-    //           text: '线程&脚本引入&变量&JS值&原始值&引用值&内存',
-    //           link: '/notes/es3&es5/2.线程&脚本引入&变量&JS值&原始值&引用值&内存'
+    //           text: '3.面向对象',
+    //           link: '/notes/ES6/3.面向对象'
     //         }
-    //       ]
-    //     }
-    //   ],
-    //   '/plans/': [
-    //     {
-    //       text: 'Study Plans',
-    //       collapsible: true,
-    //       items: [
-    //         { text: '2022年10月', link: '/plans/2022年10月' },
-    //         { text: '2022年11月', link: '/plans/2022年11月' }
     //       ]
     //     }
     //   ]
     // }
+
     // lastUpdatedText: '上次更新时间', //最后更新时间文本
     // docFooter: { //上下篇文本
     //   prev: '上一篇',

@@ -54,12 +54,6 @@ export function removeSep(path) {
   return path.substring(1, path.length - 1);
 }
 
-export function excludeFile(files, name) {
-  return files.filter(function (file) {
-    return file !== name;
-  });
-}
-
 export function removeIndexPage(path) {
   unlinkSync(resolve(__dirname, '../../') + `${path}index.md`);
 }
@@ -100,6 +94,12 @@ export function addExt(files, ext) {
 
 export function resolvePath(path) {
   return resolve(__dirname, path);
+}
+
+export function excludeFile(files, name) {
+  return files.filter(function (file) {
+    return file !== name;
+  });
 }
 
 function createTitle(title) {

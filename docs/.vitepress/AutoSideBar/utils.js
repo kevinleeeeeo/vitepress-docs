@@ -1,10 +1,8 @@
-import { resolve } from 'path';
+import { extname, resolve } from 'path';
 import { readdirSync, writeFileSync } from 'fs';
 
 export function readDir(path) {
-  const dir = resolve(__dirname, `../..${path}`);
-  const files = readdirSync(dir);
-  return files;
+  return readdirSync(path);
 }
 
 export function removeFilesExt(files) {
@@ -47,4 +45,37 @@ export function formatPathNameToTextName(pathName) {
 
 export function removeSep(path) {
   return path.substring(1, path.length - 1);
+}
+
+export function resolvePath(path) {
+  return resolve(__dirname, path);
+}
+
+export function makesureMdfile(files) {
+  return files.filter((f) => extname(f) === '.md');
+}
+
+export function sortFiles(files) {
+  return files.sort((a, b) => {
+    a = Number(a.split('.')[0]);
+    b = Number(b.split('.')[0]);
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
+}
+
+export function sortDate(files) {
+  return files.sort((a, b) => {
+    a = Date.parse(chsToEngDate(a));
+    b = Date.parse(chsToEngDate(b));
+    if (a < b) return 1;
+    if (a > b) return -1;
+    return 0;
+  });
+}
+
+function chsToEngDate(file) {
+  //2022年11月 -> 2022-11
+  return file.replace('.md', '').replace('年', '-').replace('月', '');
 }

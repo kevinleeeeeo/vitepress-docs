@@ -1,12 +1,3 @@
-import createSideConfig from './sidebar';
-import AutoSideBar from './AutoSideBar';
-
-const autoSideBar = (pathRules) => {
-  pathRules.forEach((path) => {
-    const vm = new AutoSideBar({ path: path });
-    const sidebar = createSideConfig(vm, path);
-    return sidebar;
-  });
-};
+import autoSideBar from './autoSideBar';
 
 export default autoSideBar;
