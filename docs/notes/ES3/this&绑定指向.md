@@ -1,4 +1,4 @@
-# ECMA
+# `this`&绑定指向
 
 ## `this`
 
@@ -14,26 +14,19 @@
 - `worker`的全局对象有：`self`
 - `globalThis`可以拿到不同环境下的全局对象
 
-**严格模式**
-
-函数内部的`this`指向`undefined`
-
-
+**严格模式**下函数内部的`this`指向`undefined`。
 
 **指向**
 
-- 函数内部还没实例化的`this`指向`window`
-- 全局范围的`this`指向`window`
-- 预编译函数`this`指向`window`
-- `apply/call`改变`this`指向
-- 构造函数的`this`指向实例化对象
+- 函数内部还没实例化的`this`指向`window`。
+- 全局范围的`this`指向`window`。
+- 预编译函数`this`指向`window`。
+- `apply/call`改变`this`指向。
+- 构造函数的`this`指向实例化对象。
 
+普通函数内部的`this`。
 
-
-普通函数内部的`this`
-
-```
-//this
+```js
 //函数内部的this
 //函数内部还没实例化的this指向window
 function test(b) {
@@ -58,9 +51,9 @@ console.log(window.d); //3
  */
 ```
 
-构造函数的`this`
+构造函数的`this`。
 
-```
+```js
 //this指向实例化对象
 function Test() {
   //var this = {
@@ -102,9 +95,9 @@ var test = new Test();
   */
 ```
 
-`call()`/`apply()`的`this`
+`call()`/`apply()`的`this`。
 
-```
+```js
 //call / apply
 function Person() {
   this.name = 'zhangsan';
@@ -138,11 +131,9 @@ console.log(p);
 3. 显示绑定: `call/apply/bind`
 4. `new`绑定 
 
-**优先级问题：**
+**优先级问题：** `new`显式 > 隐式 > 默认
 
-> `new`显示 > 隐式 > 默认
-
-```
+```js
 //1.默认绑定规则
 
 //全局this指向window
@@ -285,7 +276,7 @@ var person = new Person();
 
 练习题：
 
-```
+```js
 var name = '222';
 var a = {
   name: '111',
@@ -300,20 +291,14 @@ a.say(); //111
 
 关于优先级：
 
-```
+```js
 //显示绑定vs隐式绑定,谁优先级更高?
 function foo() {
   console.log(this.a);
 }
 
-var obj1 = {
-  a: 2,
-  foo: foo
-}
-var obj2 = {
-  a: 3,
-  foo: foo
-}
+var obj1 = { a: 2, foo: foo }
+var obj2 = { a: 3, foo: foo }
 
 obj1.foo(); //2
 obj2.foo(); //3
@@ -350,17 +335,14 @@ function foo() {
   }
   test2();
 }
-var obj = {
-  a: 1,
-  foo: foo
-}
+var obj = { a: 1, foo: foo }
 
 obj.foo();
 ```
 
-全部绑定规则对箭头函数更改`this`的方法不适用，箭头函数中的`this`取决于父函数中`this`的指向
+全部绑定规则对箭头函数更改`this`的方法不适用，箭头函数中的`this`取决于父函数中`this`的指向。
 
-```
+```js
 //尝试更改箭头函数的this指向
 function foo() {
   console.log(this);
@@ -369,19 +351,9 @@ function foo() {
   }
   return test;
 }
-var obj1 = {
-  a: 1,
-  foo: foo
-}
-var obj2 = {
-  a: 2,
-  foo: foo
-}
-var obj3 = {
-  a: 2,
-  foo: () => {
-    console.log(this);
-  }
+var obj1 = { a: 1, foo: foo }
+var obj2 = { a: 2, foo: foo }
+var obj3 = { a: 2, foo: () => { console.log(this); }
 }
 //默认绑定规则(独立调用 对箭头函数无效)
 obj1.foo()(); //this -> obj
@@ -403,9 +375,7 @@ new foo(); //报错 没有constructor
 
 **应用场景：**
 
-例子1
-
-```
+```js
 var name = 'window';
 var obj1 = {
   name: '1',
@@ -422,9 +392,7 @@ var obj1 = {
     return () => console.log(this.name);
   }
 }
-var obj2 = {
-  name: '2'
-};
+var obj2 = { name: '2' };
 
 //对象调用 谁调用指向谁
 obj1.fn1(); //this -> obj1
@@ -463,9 +431,7 @@ obj1.fn4.call(obj2)(); //this -> obj2
 
 ## bind/call/apply
 
-
-
-```
+```js
 function test() {
   console.log('a');
 }
@@ -473,14 +439,11 @@ function test() {
 test.call(); //a
 ```
 
-`call()`和`apply()`的作用：
+`call()`和`apply()`的作用改变`this`的指向。
 
-- 改变`this`的指向
+被借用方法的函数名`.call/apply`(目标函数内部/`this`, 参数)写法：
 
-写法：
-
-```
-被借用方法的函数名.call/apply(目标函数内部/this, 参数)
+```js
 function Car(brand, color) {
   this.brand = brand;
   this.color = color;
@@ -489,10 +452,7 @@ function Car(brand, color) {
   }
 }
 
-var newCar = {
-  displacement: '2.5'
-};
-
+var newCar = { displacement: '2.5' };
 var newCar2 = {};
 //实现newCar有Car里所有的属性跟方法
 //Car.call(对象, 参数1, 参数2, ...)
@@ -516,14 +476,10 @@ console.log(car);
 
 多人协作
 
-```
+```js
 function Compute() {
-  this.plus = function (a, b) {
-    console.log(a + b);
-  }
-  this.minus = function (a, b) {
-    console.log(a - b);
-  }
+  this.plus = function (a, b) { console.log(a + b); }
+  this.minus = function (a, b) { console.log(a - b); }
 }
 
 function FullCompute() {
@@ -548,13 +504,12 @@ compute.div(1, 2); //0.5
 
 **`bind`和`call`区别：**
 
-- `bind`改变`this`指向后返回一个新的函数不执行
-- `call/apply`改变`this`指向并立即执行
+- `bind`改变`this`指向后返回一个新的函数不执行。
+- `call/apply`改变`this`指向并立即执行。
 
-```
+```js
 p1.play.call(p2,'男',20);
 p1.play.apply(p2,['男',20]);
-
 p1.play.bind(p2,'男',20)();
 //类似写法
 var fn = p1.play.bind(p2,'男',20);
@@ -563,15 +518,15 @@ fn();
 
 
 
+## 重写
+
 `bind`重写：
 
-```
+```js
 //bind特性：
 //1.不执行
 //2.实例化时失效
-var p = {
-  age: 18
-}
+var p = { age: 18 }
 
 function Person() {
   console.log(this);
@@ -595,9 +550,7 @@ function Person() {
 // var person = Person.bind(p);
 // new person();
 //重写bind
-var p = {
-  age: 18
-}
+var p = { age: 18 }
 
 function Person(name1, name2) {
   console.log(this);
@@ -676,9 +629,9 @@ Function.prototype.myBind = function (context) {
 
 ## 链式调用
 
-实现链式调用
+实现链式调用。
 
-```
+```js
 var sched = {
   wakeup: function () {
     console.log('Running');

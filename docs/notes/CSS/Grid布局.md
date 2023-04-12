@@ -1,6 +1,6 @@
 
 
-# Grid布局
+# `Grid`布局
 
 可以将网页分为一个个网格，利用这些网格组合可以做出各种各样的布局。
 
@@ -408,30 +408,30 @@ grid-column-end: 4;
 容器属性`grid-template-areas`定义字母给所有位置进行命名占位，项目属性`grid-area: i;`定义占位的字母即可改变位置。以下写法跟上图显示效果一样。
 
 ```css
-    .wrapper {
-      width: 600px;
-      height: 600px;
-      margin-top: 100px auto;
-      border: 1px solid #333;
-      display: grid;
-      grid-template-rows: repeat(3, 200px);
-      grid-template-columns: repeat(3, 200px);
-      justify-items: center;
-      align-items: center;
-      grid-template-areas: 
-        "a b c"
-        "d e f"
-        "g h i";
-    }
+.wrapper {
+  width: 600px;
+  height: 600px;
+  margin-top: 100px auto;
+  border: 1px solid #333;
+  display: grid;
+  grid-template-rows: repeat(3, 200px);
+  grid-template-columns: repeat(3, 200px);
+  justify-items: center;
+  align-items: center;
+  grid-template-areas: 
+    "a b c"
+    "d e f"
+    "g h i";
+}
 
-    .item:nth-child(1) {
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      line-height: 200px;
-      border: 1px dashed #333;
-      background-color: lightslategray;
-      grid-area: i;
-    }
+.item:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 200px;
+  border: 1px dashed #333;
+  background-color: lightslategray;
+  grid-area: i;
+}
 ```
 
