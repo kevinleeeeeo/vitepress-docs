@@ -1,26 +1,26 @@
-# DOM
+# `DOM`
 
 ## 概念
 
-Document Object Model 文档对象模型，它本身是一个对象，又叫宿主对象，浏览器本身封装文档对象模型并提供一系列的相关接口和方法集合并从中找到相应的方法去处理一些问题。DOM存在的目的通过浏览器提供的这一套方法(JavaScript语法)可以去操作HTML和XML文档，DOM无法操作CSS，它能改变样式是通过操作DOM元素里的`style`属性，给属性增加了内联样式，内联样式的优先级高于外部样式表并将其覆盖。
+`Document Object Model` 文档对象模型，它本身是一个对象，又叫宿主对象，浏览器本身封装文档对象模型并提供一系列的相关接口和方法集合并从中找到相应的方法去处理一些问题。`DOM`存在的目的通过浏览器提供的这一套方法(`JavaScript`语法)可以去操作`HTML`和`XML`文档，`DOM`无法操作`CSS`，它能改变样式是通过操作`DOM`元素里的`style`属性，给属性增加了内联样式，内联样式的优先级高于外部样式表并将其覆盖。
 
-**JavaScript有三种对象**，本地对象和内置对象都是ECMAScript内部对象。
+**`JavaScript`有三种对象**，本地对象和内置对象都是`ECMAScript`内部对象。
 
-- ECMAScript提供的本地对象(Native Object)
+- `ECMAScript`提供的本地对象(`Native Object`)
   - `Object`, `Function`, `Array`, `String`, `Number`, `Boolean`, `Error`, `EvalError`, `SyntaxError`, `RangeError`, `ReferenceError`, `TypeError`, `URIError`，`Date`，`RegExp`
-- 内置对象(Built-in Object)
-  - Global在ECMA中不存在, Math
-  - Global全局下的方法有`isNaN`, `parseInt`, `Number`, `decodeURI`, `encodeURI`
-  - Global全局下的属性有`Infinity`，`NaN`，`undefined`
-- 执行JavaScript脚本环境提供的对象叫宿主对象(Host Object)，又称浏览器对象，会存在兼容性问题
+- 内置对象(`Built-in Object`)
+  - `Global`在`ECMA`中不存在, `Math`
+  - `Global`全局下的方法有`isNaN`, `parseInt`, `Number`, `decodeURI`, `encodeURI`
+  - `Global`全局下的属性有`Infinity`，`NaN`，`undefined`
+- 执行`JavaScript`脚本环境提供的对象叫宿主对象(`Host Object`)，又称浏览器对象，会存在兼容性问题。
 
-浏览器对象有window的所有方法都在BOM对象里，document所有的方法都在DOM对象里，实际上BOM包含DOM，拆分出来的原因是DOM有W3C规范，而BOM没有的原因是浏览器之间的运行方式和方法实现是不同的，所以不同浏览器之间会存在不同的BOM对象从而无法实现统一的标准和规范，导致开发者需要在不同浏览器做相应不同的兼容性。
+浏览器对象有`window`的所有方法都在`BOM`对象里，`document`所有的方法都在`DOM`对象里，实际上`BOM`包含`DOM`，拆分出来的原因是`DOM`有`W3C`规范，而`BOM`没有的原因是浏览器之间的运行方式和方法实现是不同的，所以不同浏览器之间会存在不同的`BOM`对象从而无法实现统一的标准和规范，导致开发者需要在不同浏览器做相应不同的兼容性。
 
 
 
-## document 对象
+## `document` 对象
 
-document对象代表了整个HTML文档，JavaScript中document相当于HTML文档的最上层，document的下一级是HTMLDocument。
+`document`对象代表了整个`HTML`文档，`JavaScript`中`document`相当于`HTML`文档的最上层，`document`的下一级是`HTMLDocument`。
 
 
 
@@ -30,8 +30,8 @@ document对象代表了整个HTML文档，JavaScript中document相当于HTML文�
 - `document.getElementsByName()`，定义并仅存在`Document.prototype`上。
 - `document.getElementsByTagName()`
 - `document.getElementsByClassName()`
-- `document.querySelector()`(html5 正式引入)
-- `document.querySelectorAll()`(html5 正式引入)
+- `document.querySelector()`(`html5` 正式引入)
+- `document.querySelectorAll()`(`html5` 正式引入)
 
 关于`querySelector`：
 
@@ -105,12 +105,12 @@ console.log(html);
 console.log(document.getElementById('app').nodeType);  //1
 ```
 
-- 元素节点(相当于 DOM 元素)：节点号 1
+- 元素节点(相当于 `DOM` 元素)：节点号 1
 - 属性节点：节点号 2
-- 文本节点(text)： 节点号 3
-- 注释节点(comment)： 节点号 8
-- document 节点： 节点号 9
-- document fragment 节点： 节点号 11
+- 文本节点(`text`)： 节点号 3
+- 注释节点(`comment`)： 节点号 8
+- `document` 节点： 节点号 9
+- `document fragment` 节点： 节点号 11
 
 `Node.firstChild`寻找第一个节点和`Node.lastChild`寻找最后一个节点。
 
@@ -139,13 +139,13 @@ console.log(document.getElementById('app').firstChild.nextSibling.previousSiblin
 
 ## 遍历节点元素
 
-- `Node.parentElement`：父元素，IE9 及以下不支持
-- `Element.children`：子元素，IE7 及以下不支持
-- `Element.childrenElemntCount = Element.children.length`，IE9 及以下不支持
-- `Element.firstElementChild`：第一个子元素，IE9 及以下不支持
-- `Element.lastElementChild`：最后一个子元素，IE9 及以下不支持
-- `Element.nextElemntSibling`：下一个兄弟元素，IE9 及以下不支持
-- `Element.previousElemntSibling`：上一个兄弟元素，IE9 及以下不支持
+- `Node.parentElement`：父元素，`IE9` 及以下不支持
+- `Element.children`：子元素，`IE7` 及以下不支持
+- `Element.childrenElemntCount = Element.children.length`，`IE9` 及以下不支持
+- `Element.firstElementChild`：第一个子元素，`IE9` 及以下不支持
+- `Element.lastElementChild`：最后一个子元素，`IE9` 及以下不支持
+- `Element.nextElemntSibling`：下一个兄弟元素，`IE9` 及以下不支持
+- `Element.previousElemntSibling`：上一个兄弟元素，`IE9` 及以下不支持
 
 `Node.parentElement`寻找当前节点的父元素节点。
 
@@ -374,29 +374,29 @@ console.log(div.hasChildNodes()); //true
 
 
 
-## DOM 结构树
+## `DOM` 结构树
 
-Node原型为EventTarget原型为Object原型为 null。
+`Node`原型为`EventTarget`原型为`Object`原型为 `null`。
 
-- Attr
-- Document
-  - HTMLDocument
-  - XMLDocument
-- CharacterData(字符数据)
-  - Text
-  - Comment
-- Element
-  - XMLElement
-  - HTMLElement
-    - HTMLHeadElement
-    - HTMLBodyElement
-    - HTMLTitleElement
-    - HTMLParagraphElement
-    - HTMLInputElement
-    - HTMLTableElement
+- `Attr`
+- `Document`
+  - `HTMLDocument`
+  - `XMLDocument`
+- `CharacterData`(字符数据)
+  - `Text`
+  - `Comment`
+- `Element`
+  - `XMLElement`
+  - `HTMLElement`
+    - `HTMLHeadElement`
+    - `HTMLBodyElement`
+    - `HTMLTitleElement`
+    - `HTMLParagraphElement`
+    - `HTMLInputElement`
+    - `HTMLTableElement`
     - 其他
 
-document的原型是HTMLDocument，HTMLDocument的原型是Document，Document的原型是Node，Node的原型是EventTarget，EventTarget的原型是Object。Object的原型是Object.prototype。
+`document`的原型是`HTMLDocument`，`HTMLDocument`的原型是`Document`，`Document`的原型是`Node`，`Node`的原型是`EventTarget`，`EventTarget`的原型是`Object`。`Object`的原型是`Object.prototype`。
 
 ```js
 console.log(Object.getPrototypeOf(document));
@@ -599,7 +599,7 @@ console.dir(Object.getPrototypeOf(Object.getPrototypeOf(attr)));
 
 ## 节点创建
 
-节点的创建方法仅存在`Document`，不存在`Elemnet`和`HTMLElement`的原型上。`document`创建的节点引用临时存放在内存里，还没有挂载到DOM树上。
+节点的创建方法仅存在`Document`，不存在`Elemnet`和`HTMLElement`的原型上。`document`创建的节点引用临时存放在内存里，还没有挂载到`DOM`树上。
 
 - `document.createElement()`：创建元素节点
 - `document.createTextNode()`：创建文本节点
@@ -641,7 +641,7 @@ var p = document.createElement('p');
 document.body.appendChild(p);
 ```
 
-`Node.appendChild`不仅有增加节点，还有剪切节点的功能。剪切功能能动态的改变dom结构，有着非常重要的作用。
+`Node.appendChild`不仅有增加节点，还有剪切节点的功能。剪切功能能动态的改变`dom`结构，有着非常重要的作用。
 
 ```html
 //此写法就可以将原来dom里的a标签剪切到div标签里
@@ -735,7 +735,7 @@ Node.prototype.insertAfter = function (tar, newElem) {
 - `Node.removeChild()`：移除子节点
 - `Node.remove()`：销毁节点，释放内存
 
-`Node.removeChild`的移除子节点的写法是父节点调用执行，子节点作为参数传入。实际上从dom树上移除节点，但是没有真正的在内存中进行回收销毁，被移除的节点仍然保存在内存中。
+`Node.removeChild`的移除子节点的写法是父节点调用执行，子节点作为参数传入。实际上从`dom`树上移除节点，但是没有真正的在内存中进行回收销毁，被移除的节点仍然保存在内存中。
 
 ```html
 //删除之前
@@ -780,7 +780,7 @@ Node.prototype.insertAfter = function (tar, newElem) {
 
 设置和获取元素的`HTML`。
 
-- `Element.innerHTML` ，设置和获取元素的 HTML，`Element`和`HTMLElement`原型上的方法。
+- `Element.innerHTML` ，设置和获取元素的 `HTML`，`Element`和`HTMLElement`原型上的方法。
 - `HTMLElement.innerText`，`HTMLElement`原型上的方法。
 
 尝试打印节点的`innerHTML`，返回字符串内容。
@@ -797,7 +797,7 @@ Node.prototype.insertAfter = function (tar, newElem) {
 </script>
 ```
 
-尝试设置`innerHTML`内的值，会覆盖原来的字符串内容。使用`+=`语法可以追加内容，同样可以解析内容为html的内容。
+尝试设置`innerHTML`内的值，会覆盖原来的字符串内容。使用`+=`语法可以追加内容，同样可以解析内容为`html`的内容。
 
 ```html
 <div>
@@ -818,7 +818,7 @@ Node.prototype.insertAfter = function (tar, newElem) {
 </div>
 ```
 
-尝试打印父节点内的`innerText`内容，它会过滤所有标签，仅仅打印文本内容。同样`+=`语句可以追加内容，但是追加html内容时只打印字符串而不会去解析html标签，原因是它将`<`或`>`解析为字符实体`&lt;`或`&gt;`。
+尝试打印父节点内的`innerText`内容，它会过滤所有标签，仅仅打印文本内容。同样`+=`语句可以追加内容，但是追加`html`内容时只打印字符串而不会去解析`html`标签，原因是它将`<`或`>`解析为字符实体`&lt;`或`&gt;`。
 
 ```html
 <div>
@@ -837,27 +837,27 @@ Node.prototype.insertAfter = function (tar, newElem) {
 
 **注意点：**
 
-- 父节点 HTML 不要写错
-- 在`innerHTML`里 HTML 字符串不要写，旧版浏览器报错。
-- document 写法 1：`document.body.innerHTML`
-- document 写法 2：`document.documentElement.innerHTML`
+- 父节点 `HTML` 不要写错
+- 在`innerHTML`里 `HTML` 字符串不要写，旧版浏览器报错。
+- `document` 写法 1：`document.body.innerHTML`
+- `document` 写法 2：`document.documentElement.innerHTML`
 - `innerHTML`元素内部的所有内容都会被删除掉
 - `outterHTML`元素外部的所有内容都会删除替换
 
 ***设置`innerHTML`到底发生了什么?***
 
 1. `innerHTML= '<h1>123</h1>'`
-2. `<h1>123</h1>`解析为 HTML 文档结构
-3. 用 DocumentFragment 将这个 HTML 文档结构变成 DOM 节点
-4. 原本父结点上的所有内容都会被替换成这个 DOM 节点
+2. `<h1>123</h1>`解析为 `HTML` 文档结构
+3. 用 `DocumentFragment` 将这个 `HTML` 文档结构变成 `DOM` 节点
+4. 原本父结点上的所有内容都会被替换成这个 `DOM` 节点
 
 以上侧面反映了`innerHTML`的性能并不高效，普通文本尽量避免使用`innerHTML`。
 
 **安全问题：**
 
-HTML5 和现代的新的浏览器都会阻止这种通过`innerHTML`嵌入 `script` 脚本的程序执行。插入纯文本的时候就不用`innerHTML`，应该使用`Node.textConent`，它创建了一个文本节点，不会去解析HTML，只会将文本插入到元素内部去。
+`HTML5` 和现代的新的浏览器都会阻止这种通过`innerHTML`嵌入 `script` 脚本的程序执行。插入纯文本的时候就不用`innerHTML`，应该使用`Node.textConent`，它创建了一个文本节点，不会去解析`HTML`，只会将文本插入到元素内部去。
 
-`Node.textContent`可以赋值更改，但不能解析HTML，不能成为一个DOM节点，仅仅是一个文本节点。
+`Node.textContent`可以赋值更改，但不能解析`HTML`，不能成为一个`DOM`节点，仅仅是一个文本节点。
 
 ```js
 oBox.textContent = '10'; //浏览器显示10
@@ -866,19 +866,19 @@ oBox.textContent = '<h1>123</h1>'; //浏览器不解析显示<h1>123</h1>
 
 
 
-关于`HTMLElement.innerText`，给元素渲染文本节点，专门服务于`HTML`，低于 IE11。与`textContent`的区别是
+关于`HTMLElement.innerText`，给元素渲染文本节点，专门服务于`HTML`，低于 `IE11`。与`textContent`的区别是
 
 - `textContent`：获取所有元素的内容，如`<script>`和`<style>`，把非标签的内容全部剔除，显示非标签内容。
-- `innerText`：只会获取给人看的内容，忽略`<br>`，`<style>`标签。会受到 CSS 的影响，导致回流，重新计算样式。
+- `innerText`：只会获取给人看的内容，忽略`<br>`，`<style>`标签。会受到 `CSS` 的影响，导致回流，重新计算样式。
 
 **总结：**
 
 - `innerHTML`存在性能问题。
-- `textContent`没有`innerHTML`功能那么好，`innerHTML`可以放 html 字符串，但有更好的性能不会解析 html 文档。
+- `textContent`没有`innerHTML`功能那么好，`innerHTML`可以放 `html` 字符串，但有更好的性能不会解析 `html` 文档。
 
 **关于使用：**
 
-- 非 html 尽量用`textContent`, 能避免用`innerText`
+- 非 `html` 尽量用`textContent`, 能避免用`innerText`
 - 避免使用`innerHTML`可以用`createElement`
 
 
@@ -923,7 +923,7 @@ div.setAttribute('id', 'box');
 </script>
 ```
 
-HTML5中获取元素自定义属性如`data-xxx`。可以通过`HTMLElement.dataset`属性去拿到(网页兼容性不及移动端，IE9及以下不支持)，也可以通过`ELement.getAttribute`方法去拿到。
+`HTML5`中获取元素自定义属性如`data-xxx`。可以通过`HTMLElement.dataset`属性去拿到(网页兼容性不及移动端，`IE9`及以下不支持)，也可以通过`ELement.getAttribute`方法去拿到。
 
 ```html
 <div class="box" data-id="1001"></div>
@@ -1011,7 +1011,7 @@ console.log(date.toString());
 //与date.toString一样打印字符串形式
 ```
 
-`Date.prototype.getTime()`返回一个时间的格林威治时间数值 (时间戳)。表示从 1970 年 1 月 1 日 0 时 0 分 0 秒（UTC，即协调世界时）距离该日期对象所代表时间的毫秒数。可以利用两个时间差来做很多事情。
+`Date.prototype.getTime()`返回一个时间的格林威治时间数值 (时间戳)。表示从 1970 年 1 月 1 日 0 时 0 分 0 秒（`UTC`，即协调世界时）距离该日期对象所代表时间的毫秒数。可以利用两个时间差来做很多事情。
 
 ```js
 console.log(date.getTime());
@@ -1103,7 +1103,7 @@ console.log(date.getMilliseconds());
 
 ## 滚动距离/高度
 
-返回文档在窗口左上角水平和垂直方向滚动的像素。如点击按钮将文档窗口在水平和垂直方向各滚动 100px 。
+返回文档在窗口左上角水平和垂直方向滚动的像素。如点击按钮将文档窗口在水平和垂直方向各滚动 `100px` 。
 
 给浏览器页面定义大数值宽高直至上下出现滚动条。当没有移动滚动条时，控制台打印`pageXOffset`和`pageYOffset`的数值为0，当随意移动时数值的大小为滚动条移动的长度。
 
@@ -1124,7 +1124,7 @@ console.log(date.getMilliseconds());
 
 <img src="http://note-img-bed.dt-code.fun//image-20221128125718758.png" alt="image-20221128125718758"  />
 
-常规滚动条的距离有`Window.pageXOffset`和`Window.pageYOffset`属性相等于`scrollX`和`scrollY`属性(不常见)，IE9/IE8 及以下不支持，支持的属性对应是`document.body.scrollLeft`和`document.body.scrollTop`。对应`document.documentElement.scrollLeft`和`document.documentElement.scrollTop`属性也同样支持。
+常规滚动条的距离有`Window.pageXOffset`和`Window.pageYOffset`属性相等于`scrollX`和`scrollY`属性(不常见)，`IE9/IE8` 及以下不支持，支持的属性对应是`document.body.scrollLeft`和`document.body.scrollTop`。对应`document.documentElement.scrollLeft`和`document.documentElement.scrollTop`属性也同样支持。
 
 | Browsers                              | IE6789b(怪异模式) | IE678/0/FFs(标准模式) | IE9s      | C/Sbs   | O/FFb   | O/FFs   |
 | ------------------------------------- | ----------------- | --------------------- | --------- | ------- | ------- | ------- |
@@ -1137,12 +1137,12 @@ console.log(date.getMilliseconds());
 
 > **注：**
 >
-> - IE6789b：怪异模式
-> - IE678/0/FFs：IE678/Opera/FireFox standart 标准模式
-> - IE9s： IE9 standart 标准模式
-> - C/Sbs：Chrome/Safari standard 怪异/标准模式
-> - O/FFb：Opera/FireFox 怪异模式
-> - O/FFs：Opera/FireFox 标准模式
+> - `IE6789b`：怪异模式
+> - `IE678/0/FFs`：`IE678/Opera/FireFox standart` 标准模式
+> - `IE9s`： `IE9 standart` 标准模式
+> - `C/Sbs`：`Chrome/Safari standard` 怪异/标准模式
+> - `O/FFb`：`Opera/FireFox` 怪异模式
+> - `O/FFs`：`Opera/FireFox` 标准模式
 
 封装兼容性写法。做兼容性时利用`document.documentElement`和`document.body`的`scrollTop`或`scrollLeft`合体。
 
@@ -1171,7 +1171,7 @@ getScrollOffset().top
 
 ## 怪异&标准
 
-浏览器有自己各自的兼容模式如怪异模式和标准模式，浏览器本身具有向后兼容的机制。怪异模式是厂商自己定义的标准，标准模式是w3c的标准。
+浏览器有自己各自的兼容模式如怪异模式和标准模式，浏览器本身具有向后兼容的机制。怪异模式是厂商自己定义的标准，标准模式是`w3c`的标准。
 
 ```
 document.compatMode -> BackCompat 怪异模式
@@ -1239,24 +1239,24 @@ getViewportSize().width
 
 ![image-20221128143516481](http://note-img-bed.dt-code.fun//image-20221128143516481.png)
 
-| Browsers                               | IE6789b(怪异模式) | IE678/0/FFs(标准模式) | IE9s | C/Sbs | O/FFb | O/FFs |
-| -------------------------------------- | ----------------- | --------------------- | ---- | ----- | ----- | ----- |
-| `document.body.scrollWidth`            | No                | Yes                   | No   | No    | No    | No    |
-| `document.documentElement.scrollWidth` | Yes               | No                    | No   | No    | No    | No    |
+| Browsers                               | `IE6789b`(怪异模式) | `IE678/0/FFs`(标准模式) | `IE9s` | `C/Sbs` | `O/FFb` | `O/FFs` |
+| -------------------------------------- | ------------------- | ----------------------- | ------ | ------- | ------- | ------- |
+| `document.body.scrollWidth`            | No                  | Yes                     | No     | No      | No      | No      |
+| `document.documentElement.scrollWidth` | Yes                 | No                      | No     | No      | No      | No      |
 
-假如给body标签定义高度和边框，在控制台打印`document.body.scrollHeight`时显示结果`1000`，说明`scrollHeight`不包含边框。
+假如给`<body>`标签定义高度和边框，在控制台打印`document.body.scrollHeight`时显示结果`1000`，说明`scrollHeight`不包含边框。
 
 ```html
 <body style="height: 1000px; border: 1px solid #000"></body>
 ```
 
-假如给body标签定义高度和`margin`，在控制台打印`document.body.scrollHeight`时显示结果`1000`，说明`scrollHeight`不包含外边距。
+假如给`<body>`标签定义高度和`margin`，在控制台打印`document.body.scrollHeight`时显示结果`1000`，说明`scrollHeight`不包含外边距。
 
 ```html
 <body style="height: 1000px; margin: 1px 0"></body>
 ```
 
-假如给body标签定义高度和`padding`，在控制台打印`document.body.scrollHeight`时显示结果`1002`，说明`scrollHeight`包含内边距。
+假如给`<body>`标签定义高度和`padding`，在控制台打印`document.body.scrollHeight`时显示结果`1002`，说明`scrollHeight`包含内边距。
 
 ```html
 <body style="height: 1000px; padding: 1px 0"></body>
@@ -1352,7 +1352,7 @@ getScrollSize().width
  */
 ```
 
-兼容性问题，在IE浏览器里，`DOMRect`对象并没有`width`和`height`属性。但是还是可以通过计算来获取宽高的值，如盒子宽度`width = right - x`。
+兼容性问题，在`IE`浏览器里，`DOMRect`对象并没有`width`和`height`属性。但是还是可以通过计算来获取宽高的值，如盒子宽度`width = right - x`。
 
 `Element.getBoundingClientRect`方法还存在一个不实时的问题，所以少用。
 
@@ -1470,7 +1470,7 @@ console.log(info);
 </script>
 ```
 
-如果父元素没有定位的情况时则打印 body 元素。
+如果父元素没有定位的情况时则打印 `<body>` 元素。
 
 ```js
 console.log(parent.offsetParent);
@@ -1526,7 +1526,7 @@ getElemDocPosition(son);
 
 ## 样式操作
 
-DOM 间接操作(操作内联样式)CSS。
+`DOM` 间接操作(操作内联样式)`CSS`。
 
 ```js
 oDiv.style.width = '200px';
@@ -1538,7 +1538,7 @@ oDiv.style.width = '200px';
 console.log(oDiv.style.width); //''
 ```
 
-除了`Element.style`，`Window.getComputedStyle`方法可以获取样式元素的值。但是存在兼容性问题，IE8及以下不支持。返回的`style`是一个实时的 [`CSSStyleDeclaration`](https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleDeclaration) 对象，当元素的样式更改时，它会自动更新本身。
+除了`Element.style`，`Window.getComputedStyle`方法可以获取样式元素的值。但是存在兼容性问题，`IE8`及以下不支持。返回的`style`是一个实时的 [`CSSStyleDeclaration`](https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleDeclaration) 对象，当元素的样式更改时，它会自动更新本身。
 
 ```js
 var box = document.getElementById('box');
@@ -1586,7 +1586,7 @@ function getStyles(elem, prop) {
 getStyles(div, 'height');
 ```
 
-在JS运行相关时，定义一个点击事件，每次点击实时获取宽度，并设置增加宽度。假如用`offsetWidth`来获取实时的宽度，会存在精度问题，它会包含`margin`的值，企业级解决方法是用封装的`getStyles`方法去获取实时的宽高的值，避免使用`offsetWidth`来获取。
+在`JS`运行相关时，定义一个点击事件，每次点击实时获取宽度，并设置增加宽度。假如用`offsetWidth`来获取实时的宽度，会存在精度问题，它会包含`margin`的值，企业级解决方法是用封装的`getStyles`方法去获取实时的宽高的值，避免使用`offsetWidth`来获取。
 
 ```js
 var box = document.getElementsByClassName('box')[0];

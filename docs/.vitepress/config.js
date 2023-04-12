@@ -73,5 +73,6 @@ export default defineConfig({
     //   prev: '上一篇',
     //   next: '下一篇'
     // }
-  }
+  },
+  ignoreDeadLinks: true
 });

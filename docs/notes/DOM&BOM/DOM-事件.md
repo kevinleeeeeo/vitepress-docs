@@ -14,20 +14,20 @@ document.getElementsByTagName('div')[0].onclick = function(){
 
 ## 绑定方式
 
-事件句柄的绑定事件处理函数的方式，为某一个HTML元素指定了一个JS事件句柄等于一个函数的形式。此绑定的方式的缺点某个元素的一个事件只能绑定一个处理程序，再次绑定的程序会覆盖上一次绑定的程序。
+事件句柄的绑定事件处理函数的方式，为某一个`HTML`元素指定了一个`JS`事件句柄等于一个函数的形式。此绑定的方式的缺点某个元素的一个事件只能绑定一个处理程序，再次绑定的程序会覆盖上一次绑定的程序。
 
 ```js
 elem.onclick = function(){};
 ```
 
-事件源是一个对象，事件所作用在某个元素的身上，该元素就是事件源。注册事件监听器。IE9 及以下不兼容(w3c 标准)，且可以给同一事件源绑定多个事件。
+事件源是一个对象，事件所作用在某个元素的身上，该元素就是事件源。注册事件监听器。`IE9` 及以下不兼容(`w3c`标准)，且可以给同一事件源绑定多个事件。
 
 ```js
 elem.addEventListener(事件类型，事件处理函数,false);
 oBtn.addEventListener('click', function(){});
 ```
 
-兼容 IE8 以及下的绑定方法。
+兼容 `IE8` 以及下的绑定方法。
 
 ```js
 elem.attachEvent(事件类型,事件处理函数);
@@ -91,16 +91,16 @@ oBtn.addEventListener('click', function(){}, { capture: true });
 
 这些事件源没有冒泡/捕获现象：
 
-- focus
-- blur
-- change
-- submit
-- reset
-- select
+- `focus`
+- `blur`
+- `change`
+- `submit`
+- `reset`
+- `select`
 
 ## 事件源对象
 
-存放在事件处理函数的参数里，IE8 存放在 window 里。
+存放在事件处理函数的参数里，`IE8` 存放在 `window` 里。
 
 - 鼠标对象
 - 键盘对象
@@ -115,8 +115,8 @@ appaly.addEventListener('click', function(e){
 
 ## 取消冒泡
 
-- `e.stopPropagation()`： W3C标准 继承 `Event.prototype`上的方法。
-- `e.cancelBubble = true`：IE 写法。
+- `e.stopPropagation()`： `W3C`标准 继承 `Event.prototype`上的方法。
+- `e.cancelBubble = true`：`IE` 写法。
 
 兼容性封装取消冒泡方法。
 
@@ -135,8 +135,8 @@ function cancelBubble(e) {
 
 如场景取消默认链接跳转防止请求后端数据。
 
-- `e.preventDefault()`：w3c 方法，IE9 不兼容
-- `e.returnValue = false`：IE9 以下
+- `e.preventDefault()`：`w3c` 方法，`IE9` 不兼容
+- `e.returnValue = false`：`IE9`以下
 
 ```js
 //右键菜单 句柄写法
@@ -151,8 +151,8 @@ document.oncontextmenu = function(){
 
 描述从页面中接收事件的顺序，和冒泡或捕获相关。
 
-- IE 提出事件冒泡流Event Bubbling。
-- 网景 Netscape 提出事件捕获流 Event Capturing。
+- `IE` 提出事件冒泡流`Event Bubbling`。
+- 网景 `Netscape` 提出事件捕获流 `Event Capturing`。
 
 事件冒泡流，有捕获程序也可以用冒泡的处理函数来写。句柄写法`xxx.onclick`的事件绑定默认是嵌套的元素冒泡方式。而`xxx.addEventListener`默认也是冒泡的方式，但是它可以通过第三参数来改变为捕获方式。
 
@@ -251,7 +251,7 @@ inner.addEventListener('click', function () {
 
 ## 事件代理
 
-事件代理是解决了多次重复绑定事件函数的一种方案。事件代理的核心是事件对象`event`，IE对应的是`window.event`，和事件源对象`event.target`。火狐只有`event.target`，IE只有`srcElement`。
+事件代理是解决了多次重复绑定事件函数的一种方案。事件代理的核心是事件对象`event`，IE对应的是`window.event`，和事件源对象`event.target`。火狐只有`event.target`，`IE`只有`srcElement`。
 
 ```js
 oList.onclick = function (e) {
@@ -331,7 +331,7 @@ oList.onclick = function (e) {
 }
 ```
 
-写法三，利用 target 事件源对象的 tagName 属性筛选冒泡对象
+写法三，利用 `target` 事件源对象的 `tagName` 属性筛选冒泡对象
 
 ```js
 var oList = document.getElementsByTagName('ul')[0],
@@ -408,10 +408,10 @@ oUl.innerHTML = list;
 ## 鼠标坐标
 
 - `clientX/Y` :鼠标位置相对于当前可视区域的坐标(不包括滚动条的距离)。
-- `pageX/pageY`：鼠标位置相对于当前文档的坐标(包含滚动条的距离), IE9 以下不支持。
+- `pageX/pageY`：鼠标位置相对于当前文档的坐标(包含滚动条的距离), `IE9` 以下不支持。
 - `screenX/Y`：鼠标位置相对于屏幕边缘的坐标。
-- `X/Y`: 同`clientX/Y`相当 ,fireFox 不支持。
-- `layerX/Y`：同`pageX/Y`相同，IE11 以下同`clientX/Y`。
+- `X/Y`: 同`clientX/Y`相当 ,`fireFox` 不支持。
+- `layerX/Y`：同`pageX/Y`相同，`IE11` 以下同`clientX/Y`。
 - `offsetX/Y`:鼠标位置相对于块元素(仅仅拿到块级宽高数值范围内)的坐标(包括边框)，`safari`不包括边框。
 
 分析：
@@ -937,7 +937,7 @@ oList.addEventListener('mouseout', function(){
 
 ## 滚屏优化
 
-在DOM4标准里，事件处理函数中`addEventListener(eventType, handler, capture)`。参数3`capture`对象中可以定义多个属性。
+在`DOM4`标准里，事件处理函数中`addEventListener(eventType, handler, capture)`。参数3`capture`对象中可以定义多个属性。
 
 定义的`capture`属性具有冒泡变成捕获的作用。
 
