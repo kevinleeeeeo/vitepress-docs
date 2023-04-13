@@ -19,7 +19,7 @@ export default defineConfig({
       { text: 'Notes', link: '/notes/' }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/kevinlee-coder' },
+      { icon: 'github', link: 'https://github.com/kevinleeeeeo' },
       // You can also add custom icons by passing SVG as string:
       {
         icon: {

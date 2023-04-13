@@ -5,7 +5,6 @@
 `Document Object Model` 文档对象模型，它本身是一个对象，又叫宿主对象，浏览器本身封装文档对象模型并提供一系列的相关接口和方法集合并从中找到相应的方法去处理一些问题。`DOM`存在的目的通过浏览器提供的这一套方法(`JavaScript`语法)可以去操作`HTML`和`XML`文档，`DOM`无法操作`CSS`，它能改变样式是通过操作`DOM`元素里的`style`属性，给属性增加了内联样式，内联样式的优先级高于外部样式表并将其覆盖。
 
 **`JavaScript`有三种对象**，本地对象和内置对象都是`ECMAScript`内部对象。
-
 - `ECMAScript`提供的本地对象(`Native Object`)
   - `Object`, `Function`, `Array`, `String`, `Number`, `Boolean`, `Error`, `EvalError`, `SyntaxError`, `RangeError`, `ReferenceError`, `TypeError`, `URIError`，`Date`，`RegExp`
 - 内置对象(`Built-in Object`)
@@ -33,14 +32,7 @@
 - `document.querySelector()`(`html5` 正式引入)
 - `document.querySelectorAll()`(`html5` 正式引入)
 
-关于`querySelector`：
-
-- 最多只能选择一个元素
-
-关于`querySelector`& `querySelectorAll`
-
-- 性能低
-- 不实时(临时缓存)
+`querySelector`最多只能选择一个元素。`querySelector`& `querySelectorAll`的缺点是性能低和不实时(临时缓存)。
 
 不实时测试：
 
@@ -54,9 +46,7 @@ divs2[0].remove(); //[div, div, div]
 console.log(divs2); //[div, div, div]
 ```
 
-在业务场景中少用慎用`querySelectorAll`。
-
-使用`document.documentElement`属性可以获取`html`元素。
+在业务场景中少用慎用`querySelectorAll`。使用`document.documentElement`属性可以获取`html`元素。
 
 ```js
 const html = document.documentElement;
@@ -73,13 +63,25 @@ console.log(html);
 遍历节点树即为元素节点树，节点不是元素，节点包含元素。
 
 - `Node.parentNode`：父节点，`document.parendNode`为`null`
-- `Node.childNodes`：找子节点集合
+- `Node.childNodes`：找子节点集合。
 - `Node.firstChild`：第一个节点
 - `Node.lastChild`：最后一个节点
 - `Node.nextSibling`：下一个兄弟节点
 - `Node.previousSibling`：上一个兄弟节点
 
-查找子节点集合，它包括文本节点，元素节点，还有注释节点。
+`Node.childNodes`属性返回查找子节点集合(**静态**)，它包括文本节点，元素节点，还有注释节点。返回的集合是`NodeList`类数组，原型上有`entires`，`forEach`，`item`，`keys`，`values`等方法和`length`属性。
+
+```
+NodeList(7) [text, h1, text, p, text, a, text]
+NodeList.[[Prototype]]: {
+  entries: ƒ entries(),  
+  forEach: ƒ forEach(),
+  item: ƒ item(),
+  keys: ƒ keys(),
+  values: ƒ values(),
+  length: 7
+}
+```
 
 ```html
 <div id="app">
@@ -165,11 +167,19 @@ console.log(document.getElementById('app').firstChild.nextSibling.previousSiblin
 </script>
 ```
 
-`Element.children`从一个节点里寻找子元素。
+`Element.children`从一个节点里寻找子元素。返回子元素的集合(**实时**)，是一个`HTMLCollection`类数组，原型上包含`item`，`nameItem`方法和`length`属性。
 
 ```js
 console.log(document.getElementById('box').children);
 //HTMLCollection(3) [h1, a, p]
+```
+
+```
+HTMLCollection.[[Prototype]]: {
+  nameItem: ƒ nameItem(),  
+  item: ƒ item(),
+  length: 3
+}
 ```
 
 `Element.childElementCount`和`Element.children.length`返回的长度结果是一样的。
@@ -399,34 +409,24 @@ console.log(div.hasChildNodes()); //true
 `document`的原型是`HTMLDocument`，`HTMLDocument`的原型是`Document`，`Document`的原型是`Node`，`Node`的原型是`EventTarget`，`EventTarget`的原型是`Object`。`Object`的原型是`Object.prototype`。
 
 ```js
-console.log(Object.getPrototypeOf(document));
+Object.getPrototypeOf(document);
 //HTMLDocument {...}
 
-console.log(Object.getPrototypeOf(Object.getPrototypeOf(document)));
+Object.getPrototypeOf(Object.getPrototypeOf(document));
 //Document {…}
 
-console.log(
-  Object.getPrototypeOf(
-    Object.getPrototypeOf(Object.getPrototypeOf(document))
-  )
-);
+Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(document)));
 //Node {…}
 
-console.log(
-  Object.getPrototypeOf(
-    Object.getPrototypeOf(
-      Object.getPrototypeOf(Object.getPrototypeOf(document))
-    )
-  )
+Object.getPrototypeOf(
+  Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(document)))
 );
 //EventTarget {...}
 
-console.log(
+Object.getPrototypeOf(
   Object.getPrototypeOf(
     Object.getPrototypeOf(
-      Object.getPrototypeOf(
-        Object.getPrototypeOf(Object.getPrototypeOf(document))
-      )
+      Object.getPrototypeOf(Object.getPrototypeOf(document))
     )
   )
 );

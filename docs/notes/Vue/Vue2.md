@@ -2,23 +2,17 @@
 
 ## 介绍
 
-一套用于构建用户界面的渐进式框架，被设计为可以自底向上逐层应用，核心库只关心视图层。渐进式框架，`progressive framework`, `vue `对自己框架和其他框架对比后，生成的一个特定名词，自底向上逐层开发。
+一套用于构建用户界面的渐进式框架，被设计为可以自底向上逐层应用，核心库只关心视图层。渐进式框架(`Progressive framework`), `Vue `对自己框架和其他框架对比后，生成的一个特定名词，自底向上逐层开发。
 
-***`vue `的核心是什么?***
+`Vue `的核心是用模板的方式进行一系列的编译，有自己的核心库会编译模板，然后会渲染 `DOM`，`Vue `将数据于 `DOM `进行关联，并建立响应式关联，数据改变视图更新。
 
-用模板的方式进行一系列的编译，有自己的核心库会编译模板，然后会渲染 `DOM`，`Vue `将数据于 `DOM `进行关联，并建立响应式关联，数据改变视图更新。
-
-**使用Vue的优点：**
-
-应用范围广，生态环境友好，社区完善，易上手，代码轻量，发展迅速。
+使用`Vue`的优点是应用范围广，生态环境友好，社区完善，易上手，代码轻量，发展迅速。
 
 > 注意：兼容性问题，`IE8 `及以下不支持 `vue`。
 
-**数据绑定和数据流的关系：**
+**数据绑定**是数据与视图渲染之间的关系，`React`是单向数据绑定，必须通过用户事件去触发才能对状态数据进行修改，导致视图的变更。`Vue`是双向数据绑定，它本身有`v-model`的机制可以完成视图变化导致状态数据的变更和视图变更。
 
-数据绑定是数据与视图渲染之间的关系，React是单向数据绑定，必须通过用户事件去触发才能对状态数据进行修改，导致视图的变更。Vue是双向数据绑定，它本身有`v-model`的机制可以完成视图变化导致状态数据的变更和视图变更。
-
-数据流是数据流淌的方向，在父子组件中，数据按照方向去流动。Vue和React都符合单向数据流的原则，通过父组件的state来传递数据给子组件props接收。子组件只能通过emit去通知父组件更改state状态数据。
+数据流是数据流淌的方向，在父子组件中，数据按照方向去流动。`Vue`和`React`都符合单向数据流的原则，通过父组件的`state`来传递数据给子组件`props`接收。子组件只能通过`emit`去通知父组件更改`state`状态数据。
 
 
 
@@ -48,88 +42,76 @@
 
 ## 安装
 
-**方法一:**
+**方法一:**  `vite + cdn` 方式
 
-`vite + cdn` 方式
+1. 初始化项目和安装打包依赖并修改`package.json`里`scripts`的`dev`为`vite`。
 
-```js
-//1.初始化项目
+```
 npm init -y
-
-//2.安装打包依赖
 npm i -D vite@2.3.8
-
-//3.修改 package.json 里script的dev为vite
-//4.新建 index.html
-//5.写入入口标签
-<div id="app"></div>
-
-//6.引入 vue cdn 地址
-<script  src="https://unpkg.com/vue@3.1.2/dist/vue.global.js"></script>
-
-//7.引入入口文件
-//type="module" es6原生写法要求
-<script type="module" src="./src/main.js"></script>
-
-//8.启动项目
-npm run dev
-
-//9.启动成功
-
-//10.入口文件编写
-const { createApp } = Vue;
-
-const App = {
-  data() {
-    return { text: 'Hello Vue!' }
-  },
-  template: `<h1>{{text}}</h1>`
-}
-
-createApp(App).mount('#app');
-
-//11.页面显示 Hello Vue!
 ```
 
-> 补充：[cdn 加速网站](https://unpkg.com/browse/vue@3.1.2/dist/)
+2. 新建 `index.html`并写入入口标签，引入`vue3 cdn`加速地址，引入入口脚本。
+
+```html
+<div id="app"></div>
+<script  src="https://unpkg.com/vue@3.1.2/dist/vue.global.js"></script>
+<script type="module" src="./src/main.js"></script>
+```
+
+3. 启动项目`npm run dev`。
+4. 编写入口文件，引入实例`createApp()`并挂载真实节点，页面渲染成功并显示。
+
+```js
+const { createApp } = Vue;
+const App = {
+  data() { return { text: 'Hello Vue!' } },
+  template: `<h1>{{text}}</h1>`
+}
+createApp(App).mount('#app');
+```
+
+
 
 ---
 
 **方法二：**
 
-结合`webpack`打包工具搭建项目
+结合`webpack`打包工具搭建项目，`Vue2.x`项目搭建：
 
-`vue2.x`项目搭建：
+> 注：因为 `Vue `提供了编写单文件组件的配套工具，如果想要使用单文件组件，`2.0` 得需安装`vue-template-compiler`和`vue-loader`依赖，`3.0` 则需安装`vue/compiler-sfc`依赖。
 
-> 注：因为 `Vue `提供了编写单文件组件的配套工具，如果想要使用单文件组件，2.0 得需安装`vue-template-compiler`和`vue-loader`依赖，`3.0` 则需安装`vue/compiler-sfc`依赖
+1. 项目初始化和安装`webpack`依赖，更改启动脚本命令。
 
-```js
-//1.项目初始化
+```
 npm init -y
-
-//2.webpack依赖安装
 npm i -D webpack@4.44.2
 npm i -D webpack-cli@3.3.12
 npm i -D webpack-dev-server@3.11.2
+```
 
-//3.更改 package.json 脚本命令scripts为dev: webpack-dev-server
-//4.新建 index.html
-//5.写入入口标签
+2. 新建 `index.html`并写入入口标签，引入`vue2 cdn`加速地址，引入入口脚本。
+
+```html
 <div id="app"></div>
-//6.引入vue2.x的cdn
 <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+```
 
-//7.安装依赖
+3. 安装`vue2`加载器相关依赖和模板编译器。
+
+```
 npm i -D vue-loader@15.9.7
 npm i -D vue-template-compiler@2.6.14
 npm i -D html-webpack-plugin@4.5.0
+```
 
-//8.配置webpack.config.js, 详细代码往下看
+4. 配置`webpack.config.js`。
+
+```JS
 const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-//node环境下commonjs规范：
 module.exports = {
   mode: 'development',
   entry: './src/main.js',
@@ -153,14 +135,19 @@ module.exports = {
     })
   ]
 }
+```
 
-//9.启动项目
-npm run dev
+5. 启动项目`npm run dev`。
 
-//10.编写入口文件
+6. 编写入口文件，引入实例`createApp()`并挂载真实节点。
+
+```JS
 new Vue({ render: h => h(App) }).$mount('#app');
+```
 
-//11.编写app组件
+7. 编写`app.vue`根文件。浏览器成功显示渲染后的页面
+
+```html
 <template>
   <div>{{ title }}</div>
 </template>
@@ -168,16 +155,12 @@ new Vue({ render: h => h(App) }).$mount('#app');
 <script>
 export default {
   name: "App",
-  data() {
-    return { title: "Hello Vue" };
-  },
+  data() { return { title: "Hello Vue" }; },
 };
 </script>
-
-//12.浏览器成功显示渲染后的页面
 ```
 
-`vue3.x`项目搭建：基于`2.x`的文件做以下修改
+`vue3.x`项目搭建，基于`2.x`的文件做以下修改：
 
 ```js
 //1.修改入口文件为3.x写法
@@ -215,15 +198,10 @@ npm i -D @vue/devtools@5.3.4
 `webpack.config.js`配置代码：
 
 ```js
-const {
-  resolve
-} = require('path');
+const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const {
-  VueLoaderPlugin
-} = require('vue-loader');
-
+const { VueLoaderPlugin } = require('vue-loader');
 const autoprefixer = require('autoprefixer');
 
 //node环境下commonjs规范：
@@ -301,6 +279,51 @@ module.exports = {
 }
 ```
 
+## 应用实例
+
+应用实例是通过`createApp`创建 `APP `返回一个应用实例。
+
+```js
+//Application 应用 返回一个vue实例对象
+const app = Vue.createApp({});
+console.log(app);
+```
+
+应用实例里面的 `component `属性主要是用来注册全局组件。
+
+```js
+app.component('MyTitle', {
+  data(){
+    return { title: 'I Love You!' }
+  },
+  template: `<h1>{{title}}</h1>`
+});
+
+app.mount('#app');
+```
+
+在 `<template></template>`标签里使用组件
+
+```html
+<div>
+  <!-- 写法一 -->
+  <MyTitle />
+  <!-- 写法二 -->
+  <my-title />
+</div>
+```
+
+在实例上暴露了很多方法，如 ：
+
+- `component `注册组件
+- `directive `注册全局自定义指令
+- `filter `注册过滤器
+- `mixin `全局注册混入器
+- `provide `注入全局跨组件层级的属性
+- `use `使用插件
+
+实例里的大多数方法都会返回 `createApp `创建出来的应用实例，目的是允许链式调用操作。
+
 ## 模板语法
 
 `template`里面的一些 `HTML `字符串内部除开 `HTML `本身特性以外 如`Vue `的特性，如文本，表达式，属性，指令等。
@@ -312,6 +335,8 @@ module.exports = {
 将真实 `DOM `数据转为对象结构存储，再进行对比，有差别的情况下形成新的补丁再一定的算法基础下替换。
 
 
+
+## 插值
 
 **插值**是数据绑定最常见的形式就是使用`Mustache`语法 (双大括号) 的文本插值。
 
@@ -348,7 +373,6 @@ npm i -S mustache
 import Mustache from 'mustache';
 
 var data = { title: 'This is my TITLE for MUSTACHE' }
-
 var html = Mustache.render(
   `<h1>{{title}}</h1>`,
   data
@@ -385,36 +409,17 @@ document.getElementById('app').innerHTML = html;
 
 
 
+
+
+
+
+
+
 ## 指令
 
 指令 `(Directives)` 是带有 `v-` 前缀的特殊 `attribute`，它一般结合视图模板使用，响应式的作用于`dom`，指令是一种控制视图的集成方式。指令是模板应该按照怎样的逻辑进行渲染或绑定行为。会直接操作`DOM`。
 
-**内置指令有：**`v-if`/`v-else`/`v-else-if`/`v-for`/`v-show`/`v-html`/`v-once`...
-
-
-
-**双向绑定**，`v-model`：数据双向绑定 用`v-model="数据来源"`实现，也是一个语法糖，是`@input="方法"`和`:input="数据"`的语法糖。适用元素：`input`/`textarea`/`select`/`checkbox`/`radio`。`v-bind`绑定属性，目的是引号内部看做变量，`vue `会对它进行解析。
-
-> 注意：
->
-> - 使用`v-model`会忽略这些属性`value`/`checked`/`selected`
-> - 插值表达式里的变量必须是实例里面定义的属性
-
-绑定数据变量写法。
-
-```html
-//v-bind:title="被绑定变量,这里绑定内容是插值表达式里的内容"
-<p v-bind:title="content">{{content}}</p>
-
-//动态的属性名参数不能出现空格和引号，HTML的合法属性名不能出现空格引号
-<h1 v-bind:['data-' + attr]="tag">{{title}}</h1>
-//null作为属性是无效的，可以利用null解除属性绑定
-<h1 v-bind:[null]="title">{{title}}</h1>
-
-//简写
-<p :title="变量">{{content}}</p>
-<p title="字符串">{{content}}</p>
-```
+**内置指令有：**`v-if`/`v-else`/`v-else-if`/`v-for`/`v-show`/`v-html`/`v-once`等。
 
 `v-on`事件绑定方法，类似于`onclick/addEventListener`绑定事件处理函数。
 
@@ -434,7 +439,6 @@ document.getElementById('app').innerHTML = html;
 `v-model`视图双向绑定，`vue `完成了数据双向绑定的机制，好处是业务关注点全部可以放到业务逻辑层，而视图层交给了`v-model`帮助渲染和更新。
 
 ```html
-//写一个评论
 <div class="form">
   //oninput事件会将其value交给myComment数据变量
   //v-model这个特点会更改视图
@@ -639,11 +643,9 @@ export default function unmounted(el, bindings, vnode, prevNode){
 
 ## 特殊`attribute`
 
-`ref`引用，`reference`被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 `$refs` 对象上。
+`ref`引用，`reference`被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 `$refs` 对象上。如果在普通的 `DOM `元素上使用，引用指向的就是 `DOM `元素；如果用在子组件上，引用就指向组件实例。
 
-如果在普通的 `DOM `元素上使用，引用指向的就是 `DOM `元素；如果用在子组件上，引用就指向组件实例
-
-`vue `里是不需要操作 `dom `的，也不需要去获取 `dom`，有些场景需要去对 `dom `节点进行获取，也可能对 `dom `节点相关的信息，万不得已的情况下对节点进行操作
+`vue `里是不需要操作 `dom `的，也不需要去获取 `dom`，有些场景需要去对 `dom `节点进行获取，也可能对 `dom `节点相关的信息，万不得已的情况下对节点进行操作。
 
 ```html
 //拿到组件的实例
@@ -651,23 +653,21 @@ export default function unmounted(el, bindings, vnode, prevNode){
 <my-list ref="myRef"></my-list>
 ```
 
-**组件的实例的实际应用：**
-
-兄弟组件相互调用方法或者获取属性
+组件的实例的实际应用是兄弟组件相互调用方法或者获取属性。
 
 > **注意：**
 >
-> - `$refs`本身并不是响应式的，所以不要在模板中使用
-> - 不要在计算属性中访问，因为不具备响应式
-> - 不要尝试更改 `ref`, 它提供给获取节点或实例引用，并不是改变的
+> - `$refs`本身并不是响应式的，所以不要在模板中使用。
+> - 不要在计算属性中访问，因为不具备响应式。
+> - 不要尝试更改 `ref`, 它提供给获取节点或实例引用，并不是改变的。
 
 **_为什么要获取组件实例？_**
 
-可以通过调用组件相关的方法获取相应的属性，兄弟组件的情况下，需要获取自己兄弟上面的方法或者是属性的时候，可以用 `ref `把组件的实例拿出来，然后在实例上去使用属性和方法
+可以通过调用组件相关的方法获取相应的属性，兄弟组件的情况下，需要获取自己兄弟上面的方法或者是属性的时候，可以用 `ref `把组件的实例拿出来，然后在实例上去使用属性和方法。
 
 **_为什么尽量不使用 `ref`?_**
 
-因为 `vue `是数据绑定机制，经常使用 `ref `可能导致 `vue `的解决方案的匮乏, `dom `的增删改查是 `ViewModel `实现的而不是开发者去操作的
+因为 `vue `是数据绑定机制，经常使用 `ref `可能导致 `vue `的解决方案的匮乏, `dom `的增删改查是 `ViewModel `实现的而不是开发者去操作的。
 
 ```html
 //通过$refs(vue内部方法的引用集合)可以访问dom里面的属性
@@ -675,23 +675,21 @@ export default function unmounted(el, bindings, vnode, prevNode){
 console.log(this.$refs.myRef);
 ```
 
-> 注：`$refs` 早在生命周期 `beforeCreate `时候已经存在了，只有组件装载完毕后(`mounted`)才存在 `myRef`
+> 注：`$refs` 早在生命周期 `beforeCreate `时候已经存在了，只有组件装载完毕后(`mounted`)才存在 `myRef`。
 
 **_为什么只有组件装载完毕后才存在 `myRef`?_**
 
-如果没有挂载，节点就不会存在，那么就无法拿到指定节点的引用，说明在有些开发场景遇到 `ref `为 `null/undefined` 时要考虑组件是否加载完毕后才去获取 `dom `引用
+如果没有挂载，节点就不会存在，那么就无法拿到指定节点的引用，说明在有些开发场景遇到 `ref `为 `null/undefined` 时要考虑组件是否加载完毕后才去获取 `dom `引用。
 
 ---
 
 <u>**案例：移动端滚动页面加载更多**</u>
 
-**技术：**`ref(html dom)`
-
-实现上下滚动页面渲染加载更多或者暂无数据
+实现上下滚动页面渲染加载更多或者暂无数据。
 
 **原理：**
 
-通关 `ref `标签属性拿到绑定在`dom`节点里面的`clientHeight/scrollHeight/scrollTop`数据进行计算是否触底，从而每次触底时新增 5 条数据渲染到页面
+通过 `ref `标签属性拿到绑定在`dom`节点里面的`clientHeight/scrollHeight/scrollTop`数据进行计算是否触底，从而每次触底时新增 5 条数据渲染到页面。
 
 **源码地址：**
 
@@ -699,50 +697,7 @@ https://gitee.com/kevinleeeee/ref-dom-demo
 
 
 
-## 应用实例
 
-应用实例是通过`createApp`创建 `APP `返回一个应用实例。
-
-```js
-//Application 应用 返回一个vue实例对象
-const app = Vue.createApp({});
-console.log(app);
-```
-
-应用实例里面的 `component `属性主要是用来注册全局组件。
-
-```js
-app.component('MyTitle', {
-  data(){
-    return { title: 'I Love You!' }
-  },
-  template: `<h1>{{title}}</h1>`
-});
-
-app.mount('#app');
-```
-
-在 `<template></template>`标签里使用组件
-
-```html
-<div>
-  <!-- 写法一 -->
-  <MyTitle />
-  <!-- 写法二 -->
-  <my-title />
-</div>
-```
-
-在实例上暴露了很多方法，如 ：
-
-- `component `注册组件
-- `directive `注册全局自定义指令
-- `filter `注册过滤器
-- `mixin `全局注册混入器
-- `provide `注入全局跨组件层级的属性
-- `use `使用插件
-
-实例里的大多数方法都会返回 `createApp `创建出来的应用实例，目的是允许链式调用操作。
 
 
 
@@ -777,14 +732,14 @@ app.mount('#app');
 
 逻辑区域的对象里的 `data`，它的核心有：
 
-- data 必须是一个函数
-- vue 在创建实例的过程中调用 data 函数，返回数据对象
-- 通过响应式包装后存储在实例的`$data`(代理)
-- 并且实例可以直接越过`$data`可访问属性(代理)
+- `data `必须是一个函数。
+- `vue `在创建实例的过程中调用 `data `函数，返回数据对象。
+- 通过响应式包装后存储在实例的`$data`(代理)。
+- 并且实例可以直接越过`$data`可访问属性(代理)。
 
 **_为什么要用`data`?_**
 
-每次组件实例时先执行`data()`返回一个函数来保证数据的引用是唯一的。`$`, `_`, `__ `都是vue提供的内置API，开发者尽量避免用这些前缀命名自己的属性和方法。
+每次组件实例时先执行`data()`返回一个函数来保证数据的引用是唯一的。`$`, `_`, `__ `都是`vue`提供的内置`API`，开发者尽量避免用这些前缀命名自己的属性和方法。
 
 ```JS
 //data()方法执行返回一个对象
@@ -835,7 +790,7 @@ console.log(vm);
  console.log(vm.$data.author); //kevin
 ```
 
-**_data 为什么必须是一个函数？_**
+**_`data` 为什么必须是一个函数？_**
 
 如果 `data `是一个对象的话，那么很难防止同一引用重复使用的问题，而每次实例 `Vue `执行函数都会返回一个新的对象可以解决同一对象引用的问题。
 
@@ -889,9 +844,7 @@ onclick = "() => { changeTitle('xxx')}"
 //模板逻辑样式尽可能的绝对分离
 //逻辑运算结果需要被复用
 const App = {
-  data(){
-    return { studentCount: 1 }
-  },
+  data(){ return { studentCount: 1 } },
   template: `
     //不建议写法：
     <h1>{{studentCount > 0 ? ('学生数:' + studentCount) : '暂无学生'}}
@@ -901,15 +854,16 @@ const App = {
   computed: {
     studentCountInfo(){
       return this.studentCount > 0
-             ? ('学生数:' + this.studentCount)
-             : '暂无学生';
+        ? ('学生数:' + this.studentCount)
+        : '暂无学生';
     }
   }
 }
 ```
 
+`computed`对象里是一个`getter/setter`结构。
+
 ```JS
-//注意：computed对象里是一个getter/setter结构
 computed: {
   calData: {
     get(){...},
@@ -920,7 +874,7 @@ computed: {
 
 ## `watch`属性
 
-侦听器的关注点在数据更新，给数据增加侦听器，当数据更新时，侦听器函数执行。数据更新时，需要完成什么样的逻辑，如 `Ajax `数据提交。
+侦听器的关注点在数据更新，给数据增加侦听器，当数据更新时，侦听器函数执行。数据更新时，需要完成什么样的逻辑，如 `Ajax `数据提交。如答题系统，[参考演示案例](https://gitee.com/kevinleeeee/exam-vue-watch-demo)。
 
 侦听`computed`里的数据，可以获取到新老值，`result`方法更新会触发侦听器。
 
@@ -929,30 +883,32 @@ const app = Vue.createApp({
   data(){
     return { a: 'This is my Title' }
   },
-  computed: { result(){} },
   watch: {
-    result(newValue, oldValue){}
     //侦听data里的数据:
     a(newValue, oldValue){}
   }
 });
 ```
 
-**<u>案例：答题系统</u>**
+但`watch`属性普通情况下仅监听浅层的数据，对于嵌套的对象属性是不会进行监听的。解决方案是对该属性进行`deep`配置实现深度监听。`immediate`属性可以立即执行属性。
 
-有 4 道题目，点击对应答案的按钮后会显示答案结果的页面
+```JS
+const app = Vue.createApp({
+  data(){
+    return { 
+      a: 'This is my Title',
+      b: { c: 1 }
+    }
+  },
+  watch: {
+    b(newValue, oldValue){},
+    c(newValue, oldValue){} //这里无法进行watch监听
+    c: { deep: true, handler: function(newValue, oldValue){} }
+  }
+});
+```
 
-**技术：**
 
-`webpack + vue + express`
-
-**实现功能：**
-
-监听数据发生变化时触发相应的程序
-
-**源码地址：**
-
-https://gitee.com/kevinleeeee/exam-vue-watch-demo
 
 ## `Class `与 `Style `绑定
 
@@ -1061,19 +1017,15 @@ function($event){ addCount($event, 2); }
 
 事件修饰符`@click.once`，目的在与把事件处理函数中非纯逻辑的程序分离出去，如定义的事件处理方法里把`e.preventDefault()`等非逻辑的方法分离出去，保证定义的方法是仅仅是逻辑的方法。希望视图和逻辑完全的分离。
 
-- `.once`只调用一次事件处理，调用一次以后自动移除监听器
-- `.prevent`阻止默认事件
-
-- `.capture`采用捕获
-
-- `.stop`阻止事件冒泡
-
-- `.passive`拥有不调用`Event.preventDefault()`，即与`.prevent`不能一起用
-
+- `.once`只调用一次事件处理，调用一次以后自动移除监听器。
+- `.prevent`阻止默认事件。
+- `.capture`采用捕获。
+- `.stop`阻止事件冒泡。
+- `.passive`拥有不调用`Event.preventDefault()`，即与`.prevent`不能一起用。
 - `v-model.lazy`在`input+value`输入完成失去焦点时，表单数据才改变。
-
 - `v-model.number`如果无法被 `parseFloat `解析，就返回原始值/在有 `number `时，就返回数值。
-- `v-model.trim`过滤掉首尾的空白字符
+- `v-model.trim`过滤掉首尾的空白字符。
+- `.sync`可以实现父子组件通信，调用子组件派发修改父组件数据的方法，如`this.$emit('update:title')`。避免在子组件中直接修改父组件的数据。在父组件模板使用该修饰符`<div :title.sync="title"></div>`，监听数据变化并可以简化数据绑定的同时还有事件绑定`:title="title" @update:title="title = $event"`的写法。该修饰符的另外用法是对象里的属性进行绑定的简写操作，即对多个属性进行双向绑定，如`<div v-bind.sync="person"></div>`，此时就可以监听该对象里的属性，还有对组件通信方法进行绑定。
 
 
 
@@ -1087,13 +1039,11 @@ function($event){ addCount($event, 2); }
 <li v-for="(value, key, index) in list"></li>
 ```
 
-`for...of`写法。
+`for...of`写法。建议搭配`:key`使用，`key`属性是唯一的值。方便`vue`就地更新策略的实施。
 
 ```html
 <li v-for="(item, index) of list"></li>
 ```
-
-建议搭配`:key`使用，`key`属性是唯一的值。方便`vue`就地更新策略的实施。
 
 计算属性与`v-for`搭配使用写法。
 
@@ -1176,6 +1126,22 @@ function($event){ addCount($event, 2); }
 
 ## 双向绑定
 
+在`Vue`中常见的表单控件使用。假如对`<input>`输入框进行绑定数据变量写法。
+
+```html
+//v-bind:title="被绑定变量,这里绑定内容是插值表达式里的内容"
+<p v-bind:title="content">{{content}}</p>
+
+//动态的属性名参数不能出现空格和引号，HTML的合法属性名不能出现空格引号
+<h1 v-bind:['data-' + attr]="tag">{{title}}</h1>
+//null作为属性是无效的，可以利用null解除属性绑定
+<h1 v-bind:[null]="title">{{title}}</h1>
+
+//简写
+<p :title="变量">{{content}}</p>
+<p title="字符串">{{content}}</p>
+```
+
 双向绑定指的是改变数据可以改变视图上显示的内容，改变视图上显示的内容也会更改数据。表单输入的数据双向绑定，使用`v-model="数据来源"`实现的，是一个语法糖，使用了`v-model`后忽略`value`，`checked`, `selected`等属性设置，适用的表单元素控件有以下。
 
 ```html
@@ -1242,6 +1208,71 @@ woman: <input type="radio" value="female" v-model="gender" />
 
 
 
+## 表单
+
+给表单做输入绑定，如给单行文本写法。
+
+```html
+<input type="text" v-model="username" />
+<p>Username: {{ username }}</p>
+```
+
+如多行文本写法。
+
+```HTML
+<textarea v-model="desc"></textarea>
+<p>Description: {{ desc }}</p>
+```
+
+如复选框需要填写`value`属性来添加至数组里。
+
+```html
+<p>Favor Sport is:{{ sport }}</p>
+<span>
+  <input
+    type="checkbox"
+    v-model="sport"
+    value="Basketball"
+  />Basketball
+</span>
+<span>
+  <input 
+    type="checkbox" 
+    v-model="sport" 
+    value="Football" 
+  />Football
+</span>
+<span>
+  <input 
+    type="checkbox" 
+    v-model="sport"
+    value="Swimming" 
+  />Swimming
+</span>
+```
+
+如单选按钮写法。
+
+```html
+<p>Gender is: {{ gender }}</p>
+<input type="radio" v-model="gender" value="male" />male
+<input type="radio" v-model="gender" value="female" />female
+```
+
+如下拉选择框写法。
+
+```html
+<p>Area Selected: {{ area }}</p>
+<select v-model="area">
+    <option value="" disabled>Please select</option>
+    <option value="Beijing">Beijing</option>
+    <option value="Shanghai">Shanghai</option>
+    <option value="Guangzhou">Guangzhou</option>
+</select>
+```
+
+
+
 ## 模板引用
 
 `ref`是引用`DOM`节点，还可以引用组件实例，因为数据绑定机制，一般情况下是不需要去获取和操作`DOM`，所有视图的更新是由`VMModel`去驱动。
@@ -1256,12 +1287,9 @@ woman: <input type="radio" value="female" v-model="gender" />
 <script>
   export default{
     name: 'App',
-    beforeCreate(){ console.log(this.$refs); },
-    //{}
-    created(){ console.log(this.$refs); },
-    //{}
-    beforeMount(){ console.log(this.$refs); },
-    //{}
+    beforeCreate(){ console.log(this.$refs); }, //{}
+    created(){ console.log(this.$refs); }, //{}
+    beforeMount(){ console.log(this.$refs); }, //{}
     mounted(){ console.log(this.$refs); }
     //Proxy{myRef: input}
   }
@@ -1301,9 +1329,7 @@ export default{
 
 `$refs`并不是响应式数据，所以不应该在模板中使用，也不要在计算属性中访问。
 
-**`vue3`中的模板引用：**
-
-在使用组合式 `API `时，[响应式引用](https://v3.cn.vuejs.org/guide/reactivity-fundamentals.html#创建独立的响应式值作为-refs)和[模板引用](https://v3.cn.vuejs.org/guide/component-template-refs.html)的概念是统一的。为了获得对模板内元素或组件实例的引用，我们可以像往常一样声明 `ref `并从`setup`返回：
+**`vue3`中的模板引用**，在使用组合式 `API `时，[响应式引用](https://v3.cn.vuejs.org/guide/reactivity-fundamentals.html#创建独立的响应式值作为-refs)和[模板引用](https://v3.cn.vuejs.org/guide/component-template-refs.html)的概念是统一的。为了获得对模板内元素或组件实例的引用，我们可以像往常一样声明 `ref `并从`setup`返回：
 
 ```html
 //1.在dom上使用可以拿到dom元素
