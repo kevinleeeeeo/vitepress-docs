@@ -1,0 +1,29 @@
+# `ES5`新增内容介绍
+
+## 新增特点
+
+- `"use strict"`
+- `String[number] access`
+- `Multiline strings`
+- `String.trim()`
+- `Array.isArray()`
+- `Array forEach()`
+- `Array map()`
+- `Array filter()`
+- `Array reduce()`
+- `Array reduceRight()`
+- `Array every()`
+- `Array some()`
+- `Array indexOf()`
+- `Array lastIndexOf()`
+- `JSON.parse()`
+- `JSON.stringify()`
+- `Date.now()`
+- `Date toISOString()`
+- `Date toJSON()`
+- `Property getters and setters`
+- `Reserved words as property names`
+- `Object methods`
+- `Object defineProperty()`
+- `Function bind()`
+- `Trailing commas`

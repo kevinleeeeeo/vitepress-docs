@@ -40,11 +40,13 @@
 
 ## `let` 
 
-`let`本质是为了`JS`增加一个块级作用域。`ES6`新增的`let`语法是声明变量生成单独块级作用域。块级作用域是没有返回值的。
+`let`本质是为了`JS`增加一个块级作用域。`ES6`新增的`let`语法是声明变量生成单独块级作用域。
 
 函数作用域是无法正常访问的一个隐式的对象，在函数执行前一刻产生的对象。 `[[scope]]` 存储在预编译时期产生的 `GO`全局执行期上下文，和`AO`函数执行期上下文。
 
 在预编译过程中有`var`关键字声明提升的过程，会存在同一环境下的二次覆盖的变量污染问题，在`ES5`解决办法是通过立即执行函数来封闭函数作用域的方式来避免变量污染，但是函数内部仍然存在变量污染的问题，因此会采用一个`kiss`原则(`keep it simple and stupid`)来保证函数功能的单一性，函数提纯等一系列方法来解决变量污染问题。
+
+块级作用域等于匿名函数的立即调用吗？ 不等于，使用立即执行函数可以模拟块级作用域，但立即执行函数是有返回值的，而块级作用域内部是没有返回值给外部访问的。
 
 **常见的块级作用域的形式：**
 
@@ -122,7 +124,7 @@ function test(a){
 test(); //10
 ```
 
-**`let`不会声明提升，会产生一个暂时性死区。**在全局作用域下，被定义的变量之前锁定的区域为暂时性死区。
+`let`不会声明提升，会产生一个暂时性死区。在全局作用域下，被定义的变量之前锁定的区域为暂时性死区。
 
 ```js
 console.log(a);
@@ -186,7 +188,7 @@ let a;
 //ReferenceError: Cannot access 'a' before initialization
 ```
 
-**`let`只能再当前的块级作用域下生效。** 不在同一作用域下的情况不生效。
+`let`只能再当前的块级作用域下生效。 不在同一作用域下的情况不生效。
 
 ```js
 { let a = 2; }
@@ -363,45 +365,44 @@ try{
 { return }
 ```
 
-块级作用域等于匿名函数的立即调用吗？ 不等于，使用立即执行函数可以模拟块级作用域，但立即执行函数是有返回值的，而块级作用域内部是没有返回值给外部访问的。
 
 
 
-## const
 
-定义常量，不可变的量，不期望变量被更改
+## `const`
 
-```
+定义常量，不可变的量，不期望变量被更改。在模块引入时，不希望模块被更改，只是使用模块里的属性和方法。
+
+```js
 const test = require('http');
 ```
 
 **`const`特点：**
 
 - 定义的常量必要要赋值
-- 一旦定义必须赋值，值不能被更改、
+- 一旦定义必须赋值，值不能被更改
 - 有块级作用域，存在暂时性死区
 - 常量不能重复声明
 
+定义的常量必要要赋值。
 
-
-```
-//定义的常量必要要赋值
+```js
 const a;
 console.log(a);
 //Uncaught SyntaxError: Missing initializer in const declaration
 ```
 
-```
-//存在暂时性死区
-{
-  const a = 12;
-}
+存在暂时性死区。
+
+```js
+{ const a = 12; }
 console.log(a);
 //Uncaught ReferenceError: a is not defined
 ```
 
-```
-//存在暂时性死区，且不能变量提升
+存在暂时性死区，且不能变量提升。
+
+```js
 {
   console.log(a);
   const a = 12;
@@ -410,8 +411,9 @@ console.log(a);
 //Uncaught ReferenceError: a is not defined
 ```
 
-```
-//const不能重复声明
+`const`不能重复声明。
+
+```js
 {
   const a = 12;
   let a = 10;
@@ -420,12 +422,9 @@ console.log(a);
 //Uncaught SyntaxError: Identifier 'a' has already been declared
 ```
 
+`const `的值是引用值情况，栈能保证不变，堆不能保证。说明`const`只保证指针地址没错，但不保证地址里数据内容不被更改。
 
-
-`const `的值是引用值情况，栈能保证不变，堆不能保证
-
-```
-//说明const只保证指针地址没错，但不保证地址里数据内容不被更改
+```js
 const obj = {};
 obj.name = 'zhangsan';
 console.log(obj);
@@ -434,17 +433,17 @@ console.log(obj);
 
 可以通过`Object.freeze()`方法冻结`const`声明的引用值，使之不能更改引用值数据
 
-```
+```js
 const obj = {};
 Object.freeze(obj);
 obj.name = 'zhangsan';
 console.log(obj);
-//{name: "zhangsan"} freeze()之后=> {}
+//{name: "zhangsan"} freeze()之后 => {}
 ```
 
-进一步封装冻结函数
+进一步封装冻结函数。
 
-```
+```js
 function myFreeze(obj) {
   Object.freeze(obj);
   //深度递归对象里面的对象
@@ -457,28 +456,22 @@ function myFreeze(obj) {
 }
 
 var person = {
-  son: {
-    lisi: '18',
-    zhangsan: '19'
-  },
+  son: { lisi: '18', zhangsan: '19' },
   car: ['benz', 'mazda', 'bmw']
-}
+};
 
 myFreeze(person);
 person.son.wangwu = '20';
 person.car[3] = 'toyota';
 console.log(person);
-
 /**
- * 没注释myFreeze(person);
- * 打印：
+ * 没有冻结时打印：
  * {son: {…}, car: Array(4)}
  *   car: (4) ["benz", "mazda", "bmw", "toyota"]
  *   son: {lisi: "18", zhangsan: "19", wangwu: "20"}
  *   __proto__: Object
  * 
- * 注释myFreeze(person);
- * 打印：
+ * 冻结后打印：
  * {son: {…}, car: Array(3)}
  *   car: (3) ["benz", "mazda", "bmw"]
  *   son: {lisi: "18", zhangsan: "19"}
@@ -486,31 +479,24 @@ console.log(person);
  */
 ```
 
-不用`Object.freeze()`冻结的情况：
+不用`Object.freeze()`冻结的情况是这里`require`返回的是实例化对象被常量`const`接收，这种引入库的写法从源头上已经不能更改该对象的内容(因为是实例化对象)。
 
-```
-//这里require返回的是实例化对象被常量const接收
-//这种引入库的写法从源头上已经不能更改该对象的内容(因为是实例化对象)
+```js
 const http = require('http');
 ```
 
+顶层对象指`window`，顶层对象的属性。
 
-
-
-
-> **内容补充1：**
->
-> 顶层对象指`window`，顶层对象的属性
-
-```
+```js
 //早期的JavaScript写法存在问题但也能解析
 //存在不容易发现错误
 a = 1;
 console.log(a); //undefined window
 ```
 
-```
-//ES6为了改变，保持兼容性 允许var 不允许let const
+`ES6`为了改变，保持兼容性允许`var` 不允许`let const`。
+
+```js
 //所以建议用let或const写
 let a = 1;
 console.log(a); 
@@ -518,110 +504,5 @@ console.log(a);
 
 
 
-> **内容补充2：**
->
-> 专业术语：`falsy `假的值(虚值) 通过`boolean`转化为`false`的值
 
-```
-function foo(x, y) {
-  x = x || 1;
-  y = y || 2;
-  console.log(x + y);
-}
-
-foo(); //1+2=3
-foo(5, 6); //5+6=11
-foo(5); //5+2=7
-foo(null, 6); //null -> false 1+6=7
-foo(0, 5); //0 -> false 1+5=6
-```
-
-`ES5`形参为默认值写法
-
-```
-function foo(x, y) {
-  var x = typeof (arguments[0]) !== 'undefined' ? arguments[0] : 1;
-  var y = typeof (arguments[1]) !== 'undefined' ? arguments[1] : 2;
-  console.log(x + y);
-}
-foo(); //3
-foo(5, 6); //11
-foo(5); //7
-foo(null, 6); //7
-foo(0, 5); //5
-```
-
-`ES6`形参为默认值写法
-
-```
-function foo(x = 1, y = 2) {
-  console.log(x + y);
-}
-foo(); //3
-foo(5, 6); //11
-foo(5); //7
-foo(null, 6); //7
-foo(0, 5); //5
-```
-
-情况1：形参默认值会影响函数内声明造成重复声明报错
-
-```
-function foo(x = 2) {
-  let x = 2;
-  console.log(x);
-}
-foo(10);
-//Uncaught SyntaxError: Identifier 'x' has already been declared
-```
-
-特殊情况：里层声明时拿不到父级作用域的变量会报错
-
-```
-//如果不声明里层是可以拿到父级作用域的变量的
-var x = 1;
-{
-  console.log(x);
-}
-//1
-
-//里层一旦let声明，就会形成块级作用域，将无法访问父级作用域
-var x = 1;
-{
-  let x = x;
-  console.log(x);
-}
-//Uncaught ReferenceError: Cannot access 'x' before initialization
-
-//这里()里会形成单独的作用域
-//这里的写法类似上面第一个的写法情况
-//里层声明时拿不到父级作用域的变量会报错
-function foo(x = x) {
-  console.log(x);
-}
-foo();
-//Uncaught ReferenceError: Cannot access 'x' before initialization
-
-//这里()里的z=z+1 约等于 let z = z + 1,所以拿不到父级作用域,所以z没有定义
-function foo(x = w + 1, y = x + 1, z = z + 1) {
-  console.log(x, y, z);
-}
-foo();
-//Uncaught ReferenceError: Cannot access 'z' before initialization
-```
-
-惰性求值：当函数的参数为表达式的时候，会重新计算表达式的值
-
-```
-//优先访问里层作用域里存在的变量的值
-let a = 99;
-
-function foo(b = a + 1) {
-  console.log(b);
-}
-
-foo(); //100
-a = 100;
-foo(); //101
-```
 
