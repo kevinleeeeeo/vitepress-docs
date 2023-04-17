@@ -46,8 +46,11 @@ lang: en-US
 - [4.异步](/notes/ES6/4.异步)
 - [5.遍历器](/notes/ES6/5.遍历器)
 - [6.模块化&新增对象方法](/notes/ES6/6.模块化&新增对象方法)
+- [ES6新增内容介绍](/notes/ES6/ES6新增内容介绍)
 - [函数名&对象语法&描述符](/notes/ES6/函数名&对象语法&描述符)
 - [历史&let&const](/notes/ES6/历史&let&const)
+- [原型操作&对象遍历&super&Symbol](/notes/ES6/原型操作&对象遍历&super&Symbol)
+- [对象拓展&密封冻结&比较&合并](/notes/ES6/对象拓展&密封冻结&比较&合并)
 - [默认值&解构赋值&箭头函数&展开收集](/notes/ES6/默认值&解构赋值&箭头函数&展开收集)
 ## HTML
 - [HTML](/notes/HTML/HTML)

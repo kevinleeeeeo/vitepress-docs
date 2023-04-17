@@ -20,7 +20,7 @@
 - `Node`模块
 - `Node API`
 
-**核心思想：**是事件驱动，大量利用回调机制，如事件完成通知，异步的事件驱动。
+**核心思想**是事件驱动，大量利用回调机制，如事件完成通知，异步的事件驱动。
 
 ```js
 function test(a, b, cb){
@@ -1548,7 +1548,7 @@ const server = http.createServer(function (req, res) {
 
 ## 二进制
 
-**`Blob`**是前端专门用于支持文件操作的二进制对象，同时，File是一种特殊的`Blob`对象。
+`Blob`是前端专门用于支持文件操作的二进制对象，同时，File是一种特殊的`Blob`对象。
 
 ```
 //<a id="a1">点击下载</a>
@@ -1730,6 +1730,16 @@ router.get('/', async (ctx, next) => {
   child.on('error', (err) => {...});
 });
 ```
+
+
+
+
+
+
+
+
+
+
 
 
 
