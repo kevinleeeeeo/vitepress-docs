@@ -1,7 +1,6 @@
 import { defineConfig } from 'vitepress';
 import autoSideBar from './AutoSideBar';
 import generateIndexMdFile from './AutoGenIndexPage';
-
 generateIndexMdFile(['/plans/', '/notes/']);
 
 export default defineConfig({
@@ -29,45 +28,6 @@ export default defineConfig({
       }
     ],
     sidebar: autoSideBar(['/plans/', '/notes/'])
-    // sidebar: {
-    //   '/plans/': [
-    //     {
-    //       text: 'ES6',
-    //       link: 'xxxxx'
-    //     },
-    //     {
-    //       text: 'ES6',
-    //       link: 'xxxxx'
-    //     },
-    //     {
-    //       text: 'ES6',
-    //       link: 'xxxxx'
-    //     }
-    //   ]
-    // }
-    // sidebar: {
-    //   '/notes/': [
-    //     {
-    //       text: 'ES6',
-    //       collapsible: true,
-    //       items: [
-    //         {
-    //           text: '1.新增特性',
-    //           link: '/notes/ES6/1.新增特性'
-    //         },
-    //         {
-    //           text: '2.Map&Set数据类型',
-    //           link: '/notes/ES6/2.Map&Set数据类型'
-    //         },
-    //         {
-    //           text: '3.面向对象',
-    //           link: '/notes/ES6/3.面向对象'
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // }
-
     // lastUpdatedText: '上次更新时间', //最后更新时间文本
     // docFooter: { //上下篇文本
     //   prev: '上一篇',

@@ -11,6 +11,7 @@ export default (paths) => {
   paths.forEach((path) => {
     let files = readDir(resolvePath(`../..${path}`));
     files = excludeFile(files, 'index.md');
+    files = excludeFile(files, '.DS_Store');
 
     if (path === '/plans/') {
       /**

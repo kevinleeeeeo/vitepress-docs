@@ -70,10 +70,9 @@ function createPathItems(path) {
 function createNotesItems(path) {
   let textNames = readDir(resolvePath(`../..${path}`));
   const notesItems = [];
-
   //[ 'DOM&BOM', 'ES3&ES5', 'ES6', 'index.md' ]
   textNames = excludeFile(textNames, 'index.md');
-  // console.log(textNames);
+  textNames = excludeFile(textNames, '.DS_Store');
   //[ 'DOM&BOM', 'ES3&ES5', 'ES6' ]
 
   textNames.forEach((textName) => {
@@ -95,7 +94,6 @@ function createPlansItems(path) {
   files = excludeFile(files, 'index.md');
   files = removeFilesExt(files);
   files = sortDate(files);
-  // console.log(files);
 
   files.forEach((file) => {
     datesItems.push({
