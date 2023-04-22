@@ -19,6 +19,16 @@ lang: en-US
 - [DOM概述&节点操作&尺寸](/notes/DOM&BOM/DOM概述&节点操作&尺寸)
 - [浏览器事件环](/notes/DOM&BOM/浏览器事件环)
 - [浏览器对象模型(BOM)](/notes/DOM&BOM/浏览器对象模型(BOM))
+## Data
+- [ES6字符串方法](/notes/Data/ES6字符串方法)
+- [ES6数值静态方法](/notes/Data/ES6数值静态方法)
+- [ES6数组原型方法](/notes/Data/ES6数组原型方法)
+- [ES6数组静态方法](/notes/Data/ES6数组静态方法)
+- [ES6新增正则方法](/notes/Data/ES6新增正则方法)
+- [ES6的Map和Set](/notes/Data/ES6的Map和Set)
+- [ES6的WeakMap和WeakSet](/notes/Data/ES6的WeakMap和WeakSet)
+- [字符串方法](/notes/Data/字符串方法)
+- [正则](/notes/Data/正则)
 ## ES3
 - [ASCII码&错误信息&异常捕获&垃圾回收](/notes/ES3/ASCII码&错误信息&异常捕获&垃圾回收)
 - [this&绑定指向](/notes/ES3/this&绑定指向)
