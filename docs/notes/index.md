@@ -31,6 +31,8 @@ lang: en-US
 - [正则](/notes/Data/正则)
 ## ES3
 - [ASCII码&错误信息&异常捕获&垃圾回收](/notes/ES3/ASCII码&错误信息&异常捕获&垃圾回收)
+- [JavaScript发展史](/notes/ES3/JavaScript发展史)
+- [JavaScript特点](/notes/ES3/JavaScript特点)
 - [this&绑定指向](/notes/ES3/this&绑定指向)
 - [函数](/notes/ES3/函数)
 - [原型&继承](/notes/ES3/原型&继承)
@@ -40,7 +42,8 @@ lang: en-US
 - [循环&类型转换](/notes/ES3/循环&类型转换)
 - [报错&运算符&分支](/notes/ES3/报错&运算符&分支)
 - [数组&类数组&生成器&迭代器](/notes/ES3/数组&类数组&生成器&迭代器)
-- [编程语言&浏览器历史](/notes/ES3/编程语言&浏览器历史)
+- [浏览器发展史](/notes/ES3/浏览器发展史)
+- [编程语言](/notes/ES3/编程语言)
 - [预编译&作用域&闭包](/notes/ES3/预编译&作用域&闭包)
 ## ES5
 - [ES5数组遍历方法](/notes/ES5/ES5数组遍历方法)
